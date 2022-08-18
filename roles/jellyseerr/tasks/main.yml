@@ -1,0 +1,17 @@
+---
+- name: Create and run Jellyseerr container
+  docker_container:
+    image: "fallenbagel/jellyseerr:latest"
+    name: "jellyseerr"
+    env:
+      "PUID": "1000"
+      "PGID": "1000"
+      "UMASK": "002"
+      "TZ": "America/Sao_Paulo"
+    volumes:
+      - "{{ docker_dir }}/jellyseerr:/app/config"
+    networks:
+      - name: docker
+    ports:
+      - "5055:5055"
+    restart_policy: unless-stopped

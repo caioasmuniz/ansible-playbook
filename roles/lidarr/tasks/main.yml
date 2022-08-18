@@ -1,0 +1,18 @@
+---
+- name: Create and run Lidarr container
+  docker_container:
+    image: "lscr.io/linuxserver/lidarr"
+    name: "lidarr"
+    env:
+      "PUID": "1000"
+      "PGID": "1000"
+      "UMASK": "002"
+      "TZ": "America/Sao_Paulo"
+    volumes:
+      - "{{ docker_dir }}/lidarr:/config"
+      - "{{ media_dir }}:/data"
+    networks:
+      - name: docker
+    ports:
+      - "8686:8686"
+    restart_policy: unless-stopped

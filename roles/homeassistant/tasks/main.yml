@@ -1,0 +1,14 @@
+---
+- name: Create and run Home Assistant container
+  docker_container:
+    image: "lscr.io/linuxserver/homeassistant"
+    name: "homeassistant"
+    env:
+      "PUID": "1000"
+      "PGID": "1000"
+      "UMASK": "002"
+      "TZ": "America/Sao_Paulo"
+    volumes:
+      - "{{ docker_dir }}/home-assistant:/config"
+    network_mode: "host"
+    restart_policy: unless-stopped

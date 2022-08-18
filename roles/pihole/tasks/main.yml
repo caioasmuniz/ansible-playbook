@@ -1,0 +1,20 @@
+---
+- name: Create and run Pihole container
+  docker_container:
+    image: "pihole/pihole:latest"
+    name: "pihole"
+    env:
+      "PUID": "1000"
+      "PGID": "1000"
+      "UMASK": "002"
+      "TZ": "America/Sao_Paulo"
+    volumes:
+      - "{{ docker_dir }}/pihole:/etc/pihole"
+      - "{{ docker_dir }}/dnsmasq:/etc/dnsmasq.d"
+    networks:
+      - name: docker
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "3141:80/tcp"
+    restart_policy: unless-stopped

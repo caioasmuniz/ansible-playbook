@@ -1,0 +1,55 @@
+---
+- hosts: none
+  roles: 
+    - role: common
+      tags: 
+        - always
+
+- hosts: vps, home_server
+  roles:    
+    - role: docker
+      tags:
+        - docker
+    - role: wireguard
+      tags:
+        - wireguard
+
+- hosts: home_server
+  roles:    
+    - role: nextcloud
+      tags:
+        - nextcloud
+    - role: scrutiny
+      tags:
+        - scrutiny
+    - role: heimdall
+      tags:
+        - heimdall
+    - role: homeassistant
+      tags:
+        - homeassistant
+    - role: transmission
+      tags:
+        - transmission
+    - role: jellyfin
+      tags:
+        - jellyfin
+    - role: jellyseerr
+      tags:
+        - jellyseerr
+    - role: prowlarr
+      tags:
+        - prowlarr
+    - role: radarr
+      tags:
+        - radarr
+    - role: lidarr
+      tags:
+        - lidarr
+    - role: sonarr
+      tags:
+        - sonarr
+    - role: pihole
+      tags:
+        - pihole
+    

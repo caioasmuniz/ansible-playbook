@@ -1,0 +1,13 @@
+---
+- name: Install updates (Ubuntu)
+  become: true
+  apt:
+    upgrade: dist
+    update_cache: yes
+  when: ansible_distribution == "Ubuntu"
+- name: Install updates (Arch Linux)
+  become: true
+  pacman:
+    update_cache: yes
+    upgrade: yes
+  when: ansible_distribution == "Archlinux"

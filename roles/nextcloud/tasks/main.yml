@@ -1,0 +1,32 @@
+---
+- name: Create and run MariaDB container
+  docker_container:
+    name: "mariadb"
+    image: "lscr.io/linuxserver/mariadb"
+    env:
+      "PUID": "1000"
+      "PGID": "1000"
+      "TZ": "America/Sao_Paulo"
+    volumes:
+      - "{{ docker_dir }}/mariadb:/config"
+    ports:
+      - "3306:3306/tcp"
+    restart_policy: unless-stopped
+
+- name: Create and run Nextcloud container
+  docker_container:
+    image: "lscr.io/linuxserver/nextcloud"
+    name: "nextcloud"
+    env:
+      "PUID": "1000"
+      "PGID": "1000"
+      "UMASK": "002"
+      "TZ": "America/Sao_Paulo"
+    volumes:
+      - "{{ docker_dir }}/nextcloud:/config"
+      - "/home/caio/nextcloud-data:/data"
+    networks:
+      - name: docker
+    ports:
+      - "8081:443/tcp"    
+    restart_policy: unless-stopped

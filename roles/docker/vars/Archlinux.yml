@@ -1,0 +1,21 @@
+---
+docker_deps:
+  - 'bridge-utils'
+  - 'containerd'
+  - 'device-mapper'
+  - 'glibc'
+  - 'iproute2'
+  - 'libseccomp'
+  - 'libtool'
+  - 'runc'
+  - 'sqlite'
+  - 'systemd-libs'
+  - 'btrfs-progs' 
+  - 'docker-scan'
+  - 'pigz'
+  - 'python-setuptools'
+  - 'python-pip'
+
+docker_packages:
+  - 'docker'
+  - 'docker-compose'

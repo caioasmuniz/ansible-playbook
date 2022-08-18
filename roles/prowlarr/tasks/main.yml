@@ -1,0 +1,17 @@
+---
+- name: Create and run Prowlarr container
+  docker_container:
+    image: "lscr.io/linuxserver/prowlarr:develop"
+    name: "prowlarr"
+    env:
+      "PUID": "1000"
+      "PGID": "1000"
+      "UMASK": "002"
+      "TZ": "America/Sao_Paulo"
+    volumes:
+      - "{{ docker_dir }}/prowlarr:/config"
+    networks:
+      - name: docker
+    ports:
+      - "9696:9696"
+    restart_policy: unless-stopped

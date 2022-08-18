@@ -1,0 +1,15 @@
+---
+- name: Create and run Jellyfin container
+  docker_container:
+    image: "lscr.io/linuxserver/jellyfin"
+    name: "jellyfin"
+    env:
+      "PUID": "1000"
+      "PGID": "1000"
+      "UMASK": "002"
+      "TZ": "America/Sao_Paulo"
+    volumes:
+      - "{{ docker_dir }}/jellyfin:/config"
+      - "{{ media_dir }}/media:/data/media"
+    network_mode: "host"
+    restart_policy: unless-stopped

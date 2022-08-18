@@ -1,0 +1,20 @@
+---
+- name: Create and run Transmission container
+  docker_container:
+    image: "lscr.io/linuxserver/transmission"
+    name: "transmission"
+    env:
+      "PUID": "1000"
+      "PGID": "1000"
+      "UMASK": "002"
+      "TZ": "America/Sao_Paulo"
+    volumes:
+      - "{{ docker_dir }}/transmission:/config"
+      - "{{ media_dir }}/torrents:/data/torrents"
+    networks:
+      - name: docker
+    ports:
+      - "9091:9091"
+      - "51413:51413"
+      - "51413:51413/udp"
+    restart_policy: unless-stopped
