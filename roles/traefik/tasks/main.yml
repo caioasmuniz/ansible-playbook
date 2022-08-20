@@ -1,0 +1,19 @@
+---
+- name: Create and run Traefik container
+  docker_container:
+    image: "traefik:v2.8"
+    name: "traefik"
+    command: --api.insecure=true --providers.docker --entrypoints.web.address=:80
+    env:
+      "PUID": "1000"
+      "PGID": "1000"
+      "UMASK": "002"
+      "TZ": "America/Sao_Paulo"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+      - name: docker
+    ports:
+      - "80:80"
+      - "8084:8080"
+    restart_policy: unless-stopped

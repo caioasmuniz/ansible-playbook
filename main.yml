@@ -58,3 +58,6 @@
     - role: dashdot
       tags:
         - dashdot
+    - role: traefik
+      tags:
+        - traefik
