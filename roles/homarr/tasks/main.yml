@@ -1,0 +1,19 @@
+---
+- name: Create and run Homarr container
+  docker_container:
+    image: "ghcr.io/ajnart/homarr:latest"
+    name: "homarr"
+    env:
+      "PUID": "1000"
+      "PGID": "1000"
+      "UMASK": "002"
+      "TZ": "America/Sao_Paulo"
+    volumes:
+      - "{{ docker_dir }}/homarr/config:/app/data/configs"
+      - "{{ docker_dir }}/homarr/icons:/app/public/icons"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+      - name: docker
+    ports:
+      - "7575:7575"
+    restart_policy: unless-stopped

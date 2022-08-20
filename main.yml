@@ -1,5 +1,5 @@
 ---
-- hosts: none
+- hosts: all
   roles: 
     - role: common
       tags: 
@@ -52,4 +52,9 @@
     - role: pihole
       tags:
         - pihole
-    
+    - role: homarr
+      tags:
+        - homarr
+    - role: dashdot
+      tags:
+        - dashdot
