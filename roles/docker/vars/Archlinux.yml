@@ -10,7 +10,7 @@ docker_deps:
   - 'runc'
   - 'sqlite'
   - 'systemd-libs'
-  - 'btrfs-progs' 
+  - 'btrfs-progs'
   - 'docker-scan'
   - 'pigz'
   - 'python-setuptools'

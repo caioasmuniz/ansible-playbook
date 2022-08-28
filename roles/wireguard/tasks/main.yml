@@ -4,7 +4,6 @@
   docker_container:
     name: "wireguard"
     image: "weejewel/wg-easy"
-    pull: yes
     networks:
       - name: wg_network
     sysctls:

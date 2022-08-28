@@ -1,12 +1,14 @@
 ---
 - hosts: all
-  roles: 
+  name: Common Tasks
+  roles:
     - role: common
-      tags: 
+      tags:
         - always
 
 - hosts: vps, home_server
-  roles:    
+  name: VPS and Home Server Tasks
+  roles:
     - role: docker
       tags:
         - docker

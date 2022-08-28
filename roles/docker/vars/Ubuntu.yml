@@ -14,4 +14,3 @@ docker_packages:
   - 'docker-ce'
   - 'docker-compose'
   - 'cgroupfs-mount'
-
