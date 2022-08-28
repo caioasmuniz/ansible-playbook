@@ -12,4 +12,11 @@
       - "{{ docker_dir }}/jellyfin:/config"
       - "{{ media_dir }}/media:/data/media"
     network_mode: "host"
+    labels:
+      traefik.http.routers.jellyfin.entryPoints: https
+      traefik.http.routers.traefik.rule: Host(`jellyfin.{{ domain }}`)
+      traefik.http.routers.jellyfin.tls: "true"
+      traefik.http.routers.jellyfin.service: jellyfin
+      traefik.http.services.jellyfin.loadbalancer.server.url: "{{ ip }}:8096"
+
     restart_policy: unless-stopped

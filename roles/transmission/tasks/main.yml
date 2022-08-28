@@ -14,7 +14,11 @@
     networks:
       - name: docker
     ports:
-      - "9091:9091"
       - "51413:51413"
       - "51413:51413/udp"
+    labels:
+      traefik.http.routers.transmission.rule: Host(`transmission.{{ domain }}`)
+      traefik.http.routers.transmission.entrypoints: https
+      traefik.http.routers.transmission.tls: "true"
+      traefik.http.services.transmission.loadbalancer.server.port: "9091"
     restart_policy: unless-stopped

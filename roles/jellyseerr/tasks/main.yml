@@ -12,6 +12,9 @@
       - "{{ docker_dir }}/jellyseerr:/app/config"
     networks:
       - name: docker
-    ports:
-      - "5055:5055"
+    labels:
+      traefik.http.routers.jellyseerr.rule: Host(`jellyseerr.{{ domain }}`)
+      traefik.http.routers.jellyseerr.entrypoints: https
+      traefik.http.routers.jellyseerr.tls: "true"
+      traefik.http.services.jellyseerr.loadbalancer.server.port: "5055"
     restart_policy: unless-stopped

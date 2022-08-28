@@ -5,9 +5,6 @@
     image: "ghcr.io/analogj/scrutiny:master-omnibus"
     capabilities:
       - SYS_RAWIO
-    ports:
-      - "8083:8080" # webapp
-      - "8086:8086" # influxDB admin
     volumes:
       - "/run/udev:/run/udev:ro"
       - "{{ docker_dir }}/scrutiny/web:/opt/scrutiny/config"
@@ -15,3 +12,9 @@
     devices:
       - "/dev/sda"
       - "/dev/sdb"
+    labels:
+      traefik.http.routers.scrutiny.rule: Host(`scrutiny.{{ domain }}`)
+      traefik.http.routers.scrutiny.entrypoints: https
+      traefik.http.routers.scrutiny.tls: "true"
+      traefik.http.services.scrutiny.loadbalancer.server.port: "8080"
+    restart_policy: unless-stopped

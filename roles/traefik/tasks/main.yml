@@ -1,9 +1,23 @@
 ---
+- name: Create the config folder
+  ansible.builtin.file:
+    path: "{{ docker_dir }}/traefik"
+    recurse: true
+    owner: "{{ username }}"
+    group: 101
+    mode: 0770
+
+- name: Copy the traefik.yml file
+  ansible.builtin.template:
+    src: traefik.yml.j2
+    dest: "{{ docker_dir }}/traefik/traefik.yml"
+    group: 101
+    mode: 0770
+
 - name: Create and run Traefik container
   docker_container:
-    image: "traefik:v2.8"
+    image: "traefik:latest"
     name: "traefik"
-    command: --api.insecure=true --providers.docker --entrypoints.web.address=:80
     env:
       "PUID": "1000"
       "PGID": "1000"
@@ -11,9 +25,18 @@
       "TZ": "America/Sao_Paulo"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
+      - "{{ docker_dir }}/traefik/traefik.yml:/traefik.yml:ro"
     networks:
       - name: docker
     ports:
       - "80:80"
-      - "8084:8080"
+      - "443:443"
+    labels:
+      traefik.http.routers.traefik.entrypoints: https
+      traefik.http.routers.traefik.rule: Host(`traefik.{{ domain }}`)
+      traefik.http.routers.traefik.tls: "true"
+      traefik.http.routers.traefik.service: api@internal
+      traefik.http.routers.traefik.middlewares: auth
+      traefik.http.middlewares.auth.basicauth.users: "{{ auth_credentials }}"
+
     restart_policy: unless-stopped

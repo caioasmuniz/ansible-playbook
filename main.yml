@@ -12,21 +12,25 @@
     - role: docker
       tags:
         - docker
+    - role: traefik
+      tags:
+        - traefik
     - role: wireguard
       tags:
         - wireguard
 
 - hosts: home_server
-  roles:    
+  name: Home Server Tasks
+  roles:
+    - role: pihole
+      tags:
+        - pihole
     - role: nextcloud
       tags:
         - nextcloud
     - role: scrutiny
       tags:
         - scrutiny
-    - role: heimdall
-      tags:
-        - heimdall
     - role: homeassistant
       tags:
         - homeassistant
@@ -51,15 +55,9 @@
     - role: sonarr
       tags:
         - sonarr
-    - role: pihole
-      tags:
-        - pihole
     - role: homarr
       tags:
         - homarr
     - role: dashdot
       tags:
         - dashdot
-    - role: traefik
-      tags:
-        - traefik

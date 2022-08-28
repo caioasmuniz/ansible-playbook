@@ -9,11 +9,12 @@ all:
         user@192.168.23.200:
           username: user
           ip: 192.168.23.200
+          domain: example.org
 
     home_server:
       hosts: 
         user@192.168.23.200:
             username: user
             ip: 192.168.23.200
-
+            domain: example.net
 

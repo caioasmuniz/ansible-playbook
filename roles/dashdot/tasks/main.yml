@@ -17,6 +17,9 @@
       - "/:/mnt/host:ro"
     networks:
       - name: docker
-    ports:
-      - "3001:3001"
+    labels:
+      traefik.http.routers.dashdot.rule: Host(`dashdot.{{ domain }}`)
+      traefik.http.routers.dashdot.entrypoints: https
+      traefik.http.routers.dashdot.tls: "true"
+      traefik.http.services.dashdot.loadbalancer.server.port: "3001"
     restart_policy: unless-stopped

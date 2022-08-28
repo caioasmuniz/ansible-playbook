@@ -27,6 +27,10 @@
       - "/home/caio/nextcloud-data:/data"
     networks:
       - name: docker
-    ports:
-      - "8081:443/tcp"    
+    labels:
+      traefik.http.routers.nextcloud.rule: Host(`nextcloud.{{ domain }}`)
+      traefik.http.routers.nextcloud.entrypoints: https
+      traefik.http.routers.nextcloud.tls: "true"
+      traefik.http.services.nextcloud.loadbalancer.server.scheme: https
+      traefik.http.services.nextcloud.loadbalancer.server.port: "443"
     restart_policy: unless-stopped
