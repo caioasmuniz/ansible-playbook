@@ -12,9 +12,10 @@
     capabilities:
       - net_admin
       - sys_module
-    state: "started"
     env:
-      "WG_HOST": "{{ wireguard_host }}"
+      WG_HOST: "{{ wireguard_host }}"
+      WG_POST_UP: iptables -A FORWARD -i %i -j ACCEPT; iptables -t nat -A POSTROUTING -o {{ network_interface }} -j MASQUERADE
+      WG_POST_DOWN: iptables -D FORWARD -i %i -j ACCEPT; iptables -t nat -D POSTROUTING -o {{ network_interface }} -j MASQUERADE
     ports:
       - "51820:51820/udp"
     volumes:

@@ -6,6 +6,7 @@
       tags:
         - always
 
+
 - hosts: vps, home_server
   name: VPS and Home Server Tasks
   roles:
@@ -15,9 +16,19 @@
     - role: traefik
       tags:
         - traefik
-    - role: wireguard
+
+- hosts: vps
+  name: VPS Tasks
+  roles:
+    # - role: wireguard
+    #   tags:
+    #     - wireguard
+    # - role: headscale
+    #   tags:
+    #     - headscale
+    - role: netmaker
       tags:
-        - wireguard
+        - netmaker
 
 - hosts: home_server
   name: Home Server Tasks
