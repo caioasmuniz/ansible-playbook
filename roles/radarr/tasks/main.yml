@@ -14,7 +14,7 @@
     networks:
       - name: docker
     labels:
-      traefik.http.routers.piholeradarr.rule: Host(`radarr.{{ domain }}`)
+      traefik.http.routers.radarr.rule: Host(`radarr.{{ domain }}`)
       traefik.http.routers.radarr.entrypoints: https
       traefik.http.routers.radarr.tls: "true"
       traefik.http.services.radarr.loadbalancer.server.port: "7878"
