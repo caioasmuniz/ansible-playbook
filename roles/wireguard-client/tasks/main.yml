@@ -1,0 +1,19 @@
+---
+- name: Create and run Wireguard Client container
+  docker_container:
+    name: "wireguard-client"
+    image: "lscr.io/linuxserver/wireguard:latest"
+    capabilities:
+      - net_admin
+      - sys_module
+    env:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: "America/Sao_Paulo"
+      SERVERURL: "{{ domain }}"
+      ALLOWEDIPS: "10.8.0.0/24"
+    network_mode: host
+    volumes:
+      - "{{ docker_dir }}/wireguard:/config"
+      - "/lib/modules:/lib/modules"
+    restart_policy: unless-stopped

@@ -1,3 +1,4 @@
 docker_dir: /docker/config
 wireguard_host: "{{ ip }}"
-network_interface: enp0s3
+wireguard_dns: "{{ vault_wireguard_dns }}"
+wireguard_extra_allowed_ips: "{{ vault_wireguard_extra_allowed_ips }}"

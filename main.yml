@@ -6,7 +6,6 @@
       tags:
         - always
 
-
 - hosts: vps, home_server
   name: VPS and Home Server Tasks
   roles:
@@ -20,15 +19,9 @@
 - hosts: vps
   name: VPS Tasks
   roles:
-    # - role: wireguard
-    #   tags:
-    #     - wireguard
-    # - role: headscale
-    #   tags:
-    #     - headscale
-    - role: netmaker
+    - role: wireguard
       tags:
-        - netmaker
+        - wireguard
 
 - hosts: home_server
   name: Home Server Tasks
@@ -72,3 +65,6 @@
     - role: dashdot
       tags:
         - dashdot
+    - role: wireguard-client
+      tags:
+        - wireguard-client

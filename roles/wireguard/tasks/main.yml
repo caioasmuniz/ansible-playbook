@@ -14,8 +14,8 @@
       - sys_module
     env:
       WG_HOST: "{{ wireguard_host }}"
-      WG_POST_UP: iptables -A FORWARD -i %i -j ACCEPT; iptables -t nat -A POSTROUTING -o {{ network_interface }} -j MASQUERADE
-      WG_POST_DOWN: iptables -D FORWARD -i %i -j ACCEPT; iptables -t nat -D POSTROUTING -o {{ network_interface }} -j MASQUERADE
+      WG_ALLOWED_IPS: "10.8.0.0/24, {{ wireguard_extra_allowed_ips }}"
+      WG_DEFAULT_DNS: "{{ wireguard_dns }}"
     ports:
       - "51820:51820/udp"
     volumes:
