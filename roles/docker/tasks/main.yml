@@ -80,7 +80,3 @@
 - name: Create the docker network
   docker_network:
     name: docker
-
-- name: Create the wg network
-  docker_network:
-    name: wg_network
