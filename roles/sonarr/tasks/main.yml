@@ -19,3 +19,10 @@
       traefik.http.routers.sonarr.tls: "true"
       traefik.http.services.sonarr.loadbalancer.server.port: "8989"
     restart_policy: unless-stopped
+
+- name: Add CNAME entry for sonarr
+  ansible.builtin.include_role:
+    name: pihole
+    tasks_from: add_cname_record.yml
+  vars:
+    subdomain: sonarr

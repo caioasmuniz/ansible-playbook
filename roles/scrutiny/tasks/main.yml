@@ -18,3 +18,10 @@
       traefik.http.routers.scrutiny.tls: "true"
       traefik.http.services.scrutiny.loadbalancer.server.port: "8080"
     restart_policy: unless-stopped
+
+- name: Add CNAME entry for scrutiny
+  ansible.builtin.include_role:
+    name: pihole
+    tasks_from: add_cname_record.yml
+  vars:
+    subdomain: scrutiny

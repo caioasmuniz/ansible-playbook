@@ -22,3 +22,10 @@
       traefik.http.routers.transmission.tls: "true"
       traefik.http.services.transmission.loadbalancer.server.port: "9091"
     restart_policy: unless-stopped
+
+- name: Add CNAME entry for transmission
+  ansible.builtin.include_role:
+    name: pihole
+    tasks_from: add_cname_record.yml
+  vars:
+    subdomain: transmission

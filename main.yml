@@ -12,13 +12,14 @@
     - role: docker
       tags:
         - docker
-    - role: traefik
-      tags:
-        - traefik
+      
 
 - hosts: vps
   name: VPS Tasks
   roles:
+    - role: traefik
+      tags:
+        - traefik
     - role: wireguard
       tags:
         - wireguard
@@ -29,6 +30,9 @@
     - role: pihole
       tags:
         - pihole
+    - role: traefik
+      tags:
+        - traefik
     - role: nextcloud
       tags:
         - nextcloud

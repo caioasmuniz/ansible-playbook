@@ -27,3 +27,10 @@
       traefik.http.services.wireguard.loadbalancer.server.port: "51821"
       traefik.http.routers.wireguard.middlewares: auth
     restart_policy: unless-stopped
+
+- name: Add CNAME entry for wireguard
+  ansible.builtin.include_role:
+    name: pihole
+    tasks_from: add_cname_record.yml
+  vars:
+    subdomain: wireguard
