@@ -1,0 +1,5 @@
+{{ ip }} {{ domain }}
+{% for entry in pihole_extra_dns_entries %}{{ entry.ip }} {{ entry.domain }}
+{% endfor %}
+
+

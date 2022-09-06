@@ -12,3 +12,10 @@
       - "{{ docker_dir }}/home-assistant:/config"
     network_mode: "host"
     restart_policy: unless-stopped
+
+- name: Add CNAME entry for homeassistant
+  ansible.builtin.include_role:
+    name: pihole
+    tasks_from: add_cname_record.yml
+  vars:
+    subdomain: homeassistant

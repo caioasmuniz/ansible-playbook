@@ -18,5 +18,11 @@
       traefik.http.routers.jellyfin.tls: "true"
       traefik.http.routers.jellyfin.service: jellyfin
       traefik.http.services.jellyfin.loadbalancer.server.url: "{{ ip }}:8096"
-
     restart_policy: unless-stopped
+
+- name: Add CNAME entry for jellyfin
+  ansible.builtin.include_role:
+    name: pihole
+    tasks_from: add_cname_record.yml
+  vars:
+    subdomain: jellyfin

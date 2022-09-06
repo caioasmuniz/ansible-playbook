@@ -20,3 +20,10 @@
       traefik.http.routers.homarr.tls: "true"
       traefik.http.services.homarr.loadbalancer.server.port: "7575"
     restart_policy: unless-stopped
+
+- name: Add CNAME entry for homarr
+  ansible.builtin.include_role:
+    name: pihole
+    tasks_from: add_cname_record.yml
+  vars:
+    subdomain: homarr

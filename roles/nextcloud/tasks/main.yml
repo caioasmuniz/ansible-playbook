@@ -34,3 +34,10 @@
       traefik.http.services.nextcloud.loadbalancer.server.scheme: https
       traefik.http.services.nextcloud.loadbalancer.server.port: "443"
     restart_policy: unless-stopped
+
+- name: Add CNAME entry for nextcloud
+  ansible.builtin.include_role:
+    name: pihole
+    tasks_from: add_cname_record.yml
+  vars:
+    subdomain: nextcloud

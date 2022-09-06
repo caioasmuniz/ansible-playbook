@@ -23,3 +23,10 @@
       traefik.http.routers.dashdot.tls: "true"
       traefik.http.services.dashdot.loadbalancer.server.port: "3001"
     restart_policy: unless-stopped
+
+- name: Add CNAME entry for dashdot
+  ansible.builtin.include_role:
+    name: pihole
+    tasks_from: add_cname_record.yml
+  vars:
+    subdomain: dashdot

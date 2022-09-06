@@ -19,3 +19,10 @@
       traefik.http.routers.lidarr.tls: "true"
       traefik.http.services.lidarr.loadbalancer.server.port: "8686"
     restart_policy: unless-stopped
+
+- name: Add CNAME entry for lidarr
+  ansible.builtin.include_role:
+    name: pihole
+    tasks_from: add_cname_record.yml
+  vars:
+    subdomain: lidarr

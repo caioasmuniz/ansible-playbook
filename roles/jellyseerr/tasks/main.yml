@@ -18,3 +18,10 @@
       traefik.http.routers.jellyseerr.tls: "true"
       traefik.http.services.jellyseerr.loadbalancer.server.port: "5055"
     restart_policy: unless-stopped
+
+- name: Add CNAME entry for jellyseerr
+  ansible.builtin.include_role:
+    name: pihole
+    tasks_from: add_cname_record.yml
+  vars:
+    subdomain: jellyseerr

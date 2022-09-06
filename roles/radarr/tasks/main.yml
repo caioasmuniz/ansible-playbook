@@ -19,3 +19,10 @@
       traefik.http.routers.radarr.tls: "true"
       traefik.http.services.radarr.loadbalancer.server.port: "7878"
     restart_policy: unless-stopped
+
+- name: Add CNAME entry for radarr
+  ansible.builtin.include_role:
+    name: pihole
+    tasks_from: add_cname_record.yml
+  vars:
+    subdomain: radarr
