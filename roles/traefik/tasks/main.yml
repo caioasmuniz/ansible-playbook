@@ -2,42 +2,56 @@
 - name: Create the config folder
   ansible.builtin.file:
     path: "{{ docker_dir }}/traefik"
-    recurse: true
     owner: "{{ username }}"
     group: 101
-    mode: 0770
+    mode: 0775
+
+- name: Create the acme.json file
+  ansible.builtin.file:
+    path: "{{ docker_dir }}/traefik/acme.json"
+    state: touch
+    owner: "{{ username }}"
+    group: 101
+    mode: 0600
+
 
 - name: Copy the traefik.yml file
   ansible.builtin.template:
     src: traefik.yml.j2
     dest: "{{ docker_dir }}/traefik/traefik.yml"
     group: 101
-    mode: 0770
+    mode: 0775
 
 - name: Create and run Traefik container
   docker_container:
     image: "traefik:latest"
     name: "traefik"
+    restart: true
     env:
       "PUID": "1000"
       "PGID": "1000"
       "UMASK": "002"
       "TZ": "America/Sao_Paulo"
+      "DUCKDNS_TOKEN": "{{ duckdns_token }}"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "{{ docker_dir }}/traefik/traefik.yml:/traefik.yml:ro"
+      - "{{ docker_dir }}/traefik/acme.json:/acme.json"
     networks:
       - name: docker
     ports:
       - "80:80"
       - "443:443"
     labels:
+      traefik.http.middlewares.auth.basicauth.users: "{{ auth_credentials }}"
       traefik.http.routers.traefik.entrypoints: https
       traefik.http.routers.traefik.rule: Host(`traefik.{{ domain }}`)
-      traefik.http.routers.traefik.tls: "true"
       traefik.http.routers.traefik.service: api@internal
       traefik.http.routers.traefik.middlewares: auth
-      traefik.http.middlewares.auth.basicauth.users: "{{ auth_credentials }}"
+      traefik.http.routers.traefik.tls: "true"
+      traefik.http.routers.traefik.tls.certresolver: duckdns
+      traefik.http.routers.traefik.tls.domains[0].main: "{{ domain }}"
+      traefik.http.routers.traefik.tls.domains[0].sans: "*.{{ domain }}"
     restart_policy: unless-stopped
 
 - name: Add CNAME entry for traefik

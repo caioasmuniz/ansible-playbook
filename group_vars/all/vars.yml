@@ -1,2 +1,4 @@
 ssh_key_path: "{{ vault_ssh_key_path }}"
 auth_credentials: "{{ vault_auth_credentials }}"
+duckdns_token: "{{ vault_duckdns_token }}"
+email: "{{ vault_email }}"
