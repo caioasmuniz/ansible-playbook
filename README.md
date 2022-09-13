@@ -17,6 +17,16 @@ Servidor *DNS*(*Domain Name System*). Age como um bloqueador de anúncios em tod
 
   Também é utilizado nesta aplicação como um servidor de *DNS* local, sendo capaz de resolver endereços internos da rede local, permitindo o acesso aos serviços utilizando um nome de domínio/subdomínio como `home.lan`, ao invés de um endereço IP como `192.168.10.35`.
 
+## Nextcloud
+
+Serviço que opera como uma nuvem privada, sendo um substituto auto-hospedado à serviços como *Google Drive*, *Dropbox* e *iCloud*. Algumas das funções presentes são:
+
+- *Backup* automático de diretórios utilizando clientes do *Nextcloud*, disponíveis para Android, iOS, Windows, Linux e macOS. Com foco no *backup* automático de fotos nos clientes *mobile* (*Android* e *iOS*), funcionalidade parecida com a apresentada por *Google Photos*;
+
+- Função de gerência e sincronização de calendários, contatos e histórico de ligações, através dos protocolos CardDAV, CalDAV e Webcal.
+
+- Presença de uma *interface web* e aplicativos de clientes com uma experiência que remete à de serviços baseados em nuvem como *Google Drive*.
+
 ## Media Server
 
 Um conjunto de serviços integrados com a função de **requisição**, **obtenção**, **indexação** e **reprodução** de diversos tipos de mídia. Os serviços utilizados, bem como suas respectivas funções na cadeia de gerenciamento de mídia são:
