@@ -4,7 +4,7 @@ Este repositório contém uma coleção de *scripts*, usando *Ansible*, para o p
 
 ## Traefik
 
-<img align="left" width="150" src="https://cdn.jsdelivr.net/gh/walkxhub/dashboard-icons/png/traefik.png">
+<img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxhub/dashboard-icons/png/traefik.png">
 
 *Proxy* reverso. Age como ponto de entrada dos pacotes HTTP/HTTPS dos serviços (portas 80 e 443), adicionando funcionalidades à esses serviços, como:
 
@@ -17,7 +17,7 @@ Este repositório contém uma coleção de *scripts*, usando *Ansible*, para o p
 
 ## Pi-Hole
 
-<img align="left" width="150" src="https://cdn.jsdelivr.net/gh/walkxhub/dashboard-icons/png/pihole.png">
+<img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxhub/dashboard-icons/png/pihole.png">
 
 Servidor *DNS*(*Domain Name System*). Age como um bloqueador de anúncios em toda a rede local, sob o princípio de *DNS sinkhole*, ou seja, envia endereços não-roteáveis para um conjunto específico de domínios, neste caso, provedores de anúncios como, por exemplo, o *Google Ads*.
 
@@ -27,7 +27,7 @@ Servidor *DNS*(*Domain Name System*). Age como um bloqueador de anúncios em tod
 
 ## Nextcloud
 
-<img align="left" width="150" src="https://cdn.jsdelivr.net/gh/walkxhub/dashboard-icons/png/nextcloud.png">
+<img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxhub/dashboard-icons/png/nextcloud.png">
 
 Serviço que opera como uma nuvem privada, sendo um substituto auto-hospedado à serviços como *Google Drive*, *Dropbox* e *iCloud*. Algumas das funções presentes são:
 
@@ -41,15 +41,20 @@ Serviço que opera como uma nuvem privada, sendo um substituto auto-hospedado à
 
 ## Home Assistant
 
-<img align="left" width="150" src="https://cdn.jsdelivr.net/gh/walkxhub/dashboard-icons/png/home-assistant.png">
+<img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxhub/dashboard-icons/png/home-assistant.png">
 
-**Work in Progress...**
+Ferramenta voltada para o controle, gerência, integração e automação de casas inteligentes. Seu objetivo é proporcionar uma *interface* para interação com dispositivos *IoT* de forma local, centralizada e privada. Atualmente, a aplicação conta com cerca de 2000 integrações, que adicionam o suporte a diversos serviços/dispositivos através de *Home Assistant*. Exemplos de integrações são:
+
+- Controle de lâmpadas inteligentes através da *interface* do serviço;
+- Controle de reprodução de mídia em dispositivos como TVs através do protocolo DLNA;
+- Monitoramento e registro de dados de sensores;
+- Criação de automações baseadas em eventos capturados através das integrações.
 
 <br clear="left"/>
 
 ## Homarr
 
-<img align="left" width="150" src="https://cdn.jsdelivr.net/gh/walkxhub/dashboard-icons/png/homarr.png">
+<img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxhub/dashboard-icons/png/homarr.png">
 
 Este serviço apresenta uma *dashboard* em sua *interface web* com *links* para todos os outros serviços hospedados na rede. Desta forma, serve como um ponto de entrada para estas aplicações, além de funcionar como um "*hub*" do *home server*.
 <br clear="left"/>
@@ -60,7 +65,7 @@ Um conjunto de serviços integrados com a função de **requisição**, **obten�
 
 ### Jellyseerr
 
-<img align="left" width="150" src="https://cdn.jsdelivr.net/gh/walkxhub/dashboard-icons/png/jellyseerr.png">
+<img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxhub/dashboard-icons/png/jellyseerr.png">
 
 Serviço responsável pela **requisição** dos arquivos de mídia. Através de sua interface, os usuários podem requerir por programas de TV ou filmes à serem obtidos por outros serviços da cadeia.
 
@@ -68,9 +73,9 @@ Serviço responsável pela **requisição** dos arquivos de mídia. Através de 
 
 ### Radarr, Sonarr, Lidarr
 
-<img align="left" width="150" src="https://cdn.jsdelivr.net/gh/walkxhub/dashboard-icons/png/radarr.png">
-<img align="left" width="150" src="https://cdn.jsdelivr.net/gh/walkxhub/dashboard-icons/png/sonarr.png">
-<img align="left" width="150" src="https://cdn.jsdelivr.net/gh/walkxhub/dashboard-icons/png/lidarr.png">
+<img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxhub/dashboard-icons/png/radarr.png">
+<img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxhub/dashboard-icons/png/sonarr.png">
+<img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxhub/dashboard-icons/png/lidarr.png">
 
 Os três serviços têm a função de **requisição** e **indexação** dos arquivos de mídia. Isso se baseia na busca em indexadores pelos arquivos requisitados (tanto através da *interface web* da aplicação, quanto de outros serviços, como o **jellyseerr**), de acordo com metados relevantes a aquele tipo de mídia. Cada um dos três aplicativos é focado em um tipo de mídia, sendo estes:
 
@@ -82,7 +87,7 @@ Os três serviços têm a função de **requisição** e **indexação** dos arq
 
 ### Prowlarr
 
-<img align="left" width="150" src="https://cdn.jsdelivr.net/gh/walkxhub/dashboard-icons/png/prowlarr.png">
+<img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxhub/dashboard-icons/png/prowlarr.png">
 
 Este é o serviço responsável por gerenciar os indexadores utilizados na busca de arquivos nos aplicativos Radarr, Sonarr e Lidarr; proporcionando uma forma centralizada para gerência destes indexadores através de sua **interface web**.
 
@@ -90,7 +95,7 @@ Este é o serviço responsável por gerenciar os indexadores utilizados na busca
 
 ### Transmission
 
-<img align="left" width="150" src="https://cdn.jsdelivr.net/gh/walkxhub/dashboard-icons/png/transmission.png">
+<img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxhub/dashboard-icons/png/transmission.png">
 
 Cliente *BitTorrent*. Na cadeia de gerenciamento de mídia, é o responsável pela **obtenção** dos arquivos encontrados através dos serviços Radarr, Sonarr e  Lidarr.
 
@@ -98,7 +103,7 @@ Cliente *BitTorrent*. Na cadeia de gerenciamento de mídia, é o responsável pe
 
 ### Jellyfin
 
-<img align="left" width="150" src="https://cdn.jsdelivr.net/gh/walkxhub/dashboard-icons/png/jellyfin.png">
+<img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxhub/dashboard-icons/png/jellyfin.png">
 
 Serviço reponsável pela **reprodução** dos títulos já obtidos nas etapas anteriores da cadeia de gerência de mídia. Através de sua *interface web*, os usuários podem pesquisar e reproduzir os títulos de suas bibiliotecas.
 
