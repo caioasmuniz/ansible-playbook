@@ -1,6 +1,6 @@
 ---
 
-- name: Create and run Wireguard container
+- name: Create and run Wg-Easy container
   docker_container:
     name: "wireguard"
     image: "weejewel/wg-easy"

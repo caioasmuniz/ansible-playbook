@@ -13,16 +13,15 @@
       tags:
         - docker
       
-
 - hosts: vps
   name: VPS Tasks
   roles:
     - role: traefik
       tags:
         - traefik
-    - role: wireguard
+    - role: wireguard-server
       tags:
-        - wireguard
+        - wireguard-server
 
 - hosts: home_server
   name: Home Server Tasks
