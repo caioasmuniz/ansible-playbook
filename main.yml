@@ -12,7 +12,7 @@
     - role: docker
       tags:
         - docker
-      
+
 - hosts: vps
   name: VPS Tasks
   roles:
