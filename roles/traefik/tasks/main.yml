@@ -3,6 +3,7 @@
   ansible.builtin.file:
     path: "{{ docker_dir }}/traefik"
     owner: "{{ username }}"
+    state: directory
     group: 101
     mode: 0775
 

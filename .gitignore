@@ -1,3 +1,4 @@
 *.retry
 inventory.yml
+inventory-test.yml
 .markdownlint.json
