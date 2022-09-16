@@ -1,13 +1,35 @@
 ---
+- name: Disable Stub listener in systemd-resolved
+  block:
+    - name: Uncomment line in resolved.conf
+      ansible.builtin.lineinfile:
+        dest: /etc/systemd/resolved.conf
+        regexp: '#DNSStubListener=yes'
+        line: 'DNSStubListener=no'
+    - name: Change /etc/resolv.conf symlink to /run/systemd/resolve/resolv.conf
+      ansible.builtin.file:
+        src: /etc/resolv.conf
+        dest: /run/systemd/resolve/resolv.conf
+        state: link
+        force: true
+    - name: Restart systemd-resolved service
+      ansible.builtin.service:
+        name: systemd-resolved
+        state: restarted
+  when: ansible_distribution == 'Ubuntu'
+
 - name: Create the pihole folder
   ansible.builtin.file:
     path: "{{ docker_dir }}/pihole/pihole"
     owner: "{{ username }}"
+    recurse: true
 
 - name: Create the dnsmasq.d folder
   ansible.builtin.file:
     path: "{{ docker_dir }}/pihole/dnsmasq.d"
     owner: "{{ username }}"
+    recurse: true
+
 
 - name: Copy the custom.list file
   ansible.builtin.template:
