@@ -1,6 +1,10 @@
 # Ansible-Playbook
 
-Este repositório contém uma coleção de *scripts*, usando *Ansible*, para o provisionamento de um *home server*. Além disso, também provisionam uma forma de acesso remoto à rede local do usuário, utilizando um serviço de VPN instalado em um servidor na nuvem, como um *VPS - Virtual Private Server*. São provisionados os seguintes serviços:
+Este repositório contém uma coleção de *scripts*, usando *Ansible*, para o provisionamento de um *home server*. Além disso, também provisionam uma forma de acesso remoto à rede local do usuário, utilizando um serviço de VPN instalado em um servidor na nuvem, como um *VPS - Virtual Private Server*.
+
+Para lista de requisitos de *hardware* e instruções de instalação e *setup* do ambiente, acesse [INSTALL.md](INSTALL.md)
+
+Nesta coleção de *scripts*, são provisionados os seguintes serviços:
 
 ## Traefik
 
@@ -115,7 +119,7 @@ Para a criação deste serviço de *VPN* em um cenário como o descrito no pará
 
 - O nó à esquerda na imagem representa o *home server*, que age como um "*spoke*" na rede e mantém uma conexão **contínua** com o nó central.
 
-- O nó central na imagem representa o "*hub*" da rede. Este deve ser hospedado em um dispositivo com acesso à um IP público e um *firewall* configurável, de forma a permitir conexões do tipo *inbound* ao dispositivo. Isto é necessário pois este nó será responsável por aceitar conexões externas (para inicação dos túneis de *VPN*) e roteamento dos pacotes entre os nós conectados à rede. É recomendada a utilização de um serviço de *VPS* para a hospedagem deste serviço.
+- O nó central na imagem representa o "*hub*" da rede. Este deve ser hospedado em um dispositivo com acesso a um IP público e um *firewall* configurável, de forma a permitir conexões do tipo *inbound* ao dispositivo. Isto é necessário pois este nó será responsável por aceitar conexões externas (para inicação dos túneis de *VPN*) e roteamento dos pacotes entre os nós conectados à rede. É recomendada a utilização de um serviço de *VPS* para a hospedagem deste serviço.
 
 - O nó à direita na imagem representa um dispositivo móvel, localizado fora da rede local, tentando conectar-se ao *home server*. Este também age como um "*spoke*" na topologia, conectado ao *hub* de forma que pacotes destinados à endereços presentes na rede *VPN* são roteados à partir desta. Este pacote é enviado até o *hub* que, por sua vez, roteia este pacote até o *home server* que mantém uma conexão contínua ao *hub*.
 <br clear="left"/>
