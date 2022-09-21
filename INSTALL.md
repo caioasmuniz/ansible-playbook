@@ -2,7 +2,7 @@
 
 ## Materiais necessários
 
-Esta coleção de *scripts* é feita com o objetivo de apresentar certa flexibilidade com relação aos serviços à serem provisionados. Desta forma, os requisitos de *hardware* necessários podem variar de acordo com as necessidades e preferências do usuário. Com isto em vista, segue a lista de dispositivos necessários para a utilização dos *scripts*, bem como a especificação do *hardware* utilizado nos testes:
+Esta coleção de *scripts* é feita com o objetivo de apresentar certa flexibilidade com relação aos serviços à serem provisionados. Desta forma, os requisitos de *hardware* podem variar de acordo com as necessidades e preferências do usuário. Com isto em vista, segue a lista de dispositivos necessários para a utilização dos *scripts*, bem como a especificação do *hardware* utilizado nos testes:
 
 ### *Workstation*
 
@@ -17,7 +17,7 @@ Um computador com acesso à internet e conexão *SSH* estabelecida entre os outr
 
 ### *Home Server*
 
-Um computador com acesso à internet (de preferência cabeado), que servirá como *home server*. A especificação do *hardware* utilizado nos testes é:
+Um computador com acesso à internet (de preferência cabeado), que servirá como *home server*, ou seja, será o servidor que hospedará a maioria dos serviços provisionados. A especificação do *hardware* utilizado nos testes é:
   
 - *CPU*: *Intel Core* i5-3330
 - *RAM*: 6 GB de memória *DDR3* à 1333MT/s
@@ -62,7 +62,7 @@ Este é o dispositivo responsável por executar os *scripts Ansible*. Portanto, 
 
 ##### Archlinux
 
-      sudo pacman -S ansible
+    sudo pacman -S ansible
 
 #### *Setup* de chaves *SSH*
 
@@ -76,4 +76,4 @@ Este comando criará dois arquivos na pasta `~/.ssh`, chamados `id_ed25519` (cha
 
 Como uma forma de simplificar a configuração das chaves *SSH*, pode-se fazer o *upload* da chave pública (`id_ed25519.pub`) para a plataforma *GitHub*. Isso se fará útil pois esta chave [pode ser importada com facilidade durante a instalação do sistema operacional do *home_server*](link-para-parte-do-tutorial).
 
-O *upload* das chaves pode ser realizado através do *link*: [GitHub Keys](https://github.com/settings/keys)
+O *upload* da chave pública pode ser realizado através do *link*: [GitHub Keys](https://github.com/settings/keys)
