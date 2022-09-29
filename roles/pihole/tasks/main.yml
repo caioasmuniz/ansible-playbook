@@ -1,5 +1,6 @@
 ---
 - name: Disable Stub listener in systemd-resolved
+  when: ansible_distribution == 'Ubuntu'
   block:
     - name: Uncomment line in resolved.conf
       ansible.builtin.lineinfile:
@@ -16,7 +17,6 @@
       ansible.builtin.service:
         name: systemd-resolved
         state: restarted
-  when: ansible_distribution == 'Ubuntu'
 
 - name: Create the pihole folder
   ansible.builtin.file:
