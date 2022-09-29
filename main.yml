@@ -71,3 +71,9 @@
     - role: wireguard-client
       tags:
         - wireguard-client
+    - role: grafana
+      tags:
+        - grafana
+    - role: prometheus
+      tags:
+        - prometheus

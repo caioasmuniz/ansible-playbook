@@ -1,0 +1,41 @@
+---
+- name: Create the config folder
+  ansible.builtin.file:
+    path: "{{ docker_dir }}/prometheus"
+    owner: "{{ username }}"
+    state: directory
+    group: 101
+    mode: 0775
+
+- name: Copy the prometheus.yml file
+  ansible.builtin.template:
+    src: prometheus.yml.j2
+    dest: "{{ docker_dir }}/prometheus/prometheus.yml"
+    group: 101
+    mode: 0775
+
+- name: Create and run Prometheus container
+  docker_container:
+    image: "prom/prometheus:latest"
+    name: "prometheus"
+    restart: true
+
+    env:
+      "TZ": "America/Sao_Paulo"
+    volumes:
+      - "{{ docker_dir }}/prometheus:/etc/prometheus"
+    networks:
+      - name: docker
+    labels:
+      traefik.http.routers.prometheus.rule: Host(`prometheus.{{ domain }}`)
+      traefik.http.routers.prometheus.entrypoints: https
+      traefik.http.routers.prometheus.tls: "true"
+      traefik.http.services.prometheus.loadbalancer.server.port: "9090"
+    restart_policy: unless-stopped
+
+- name: Add CNAME entry for prometheus
+  ansible.builtin.include_role:
+    name: pihole
+    tasks_from: add_cname_record.yml
+  vars:
+    subdomain: prometheus
