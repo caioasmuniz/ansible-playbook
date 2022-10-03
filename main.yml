@@ -62,12 +62,6 @@
     - role: sonarr
       tags:
         - sonarr
-    - role: homarr
-      tags:
-        - homarr
-    - role: dashdot
-      tags:
-        - dashdot
     - role: wireguard-client
       tags:
         - wireguard-client
@@ -77,3 +71,6 @@
     - role: prometheus
       tags:
         - prometheus
+    - role: homepage
+      tags:
+        - homepage
