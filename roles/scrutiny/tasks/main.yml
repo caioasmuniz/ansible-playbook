@@ -12,6 +12,9 @@
     devices:
       - "/dev/sda"
       - "/dev/sdb"
+      - "/dev/sdc"
+    networks:
+      - name: docker
     labels:
       traefik.http.routers.scrutiny.rule: Host(`scrutiny.{{ domain }}`)
       traefik.http.routers.scrutiny.entrypoints: https
