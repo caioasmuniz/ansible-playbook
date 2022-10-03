@@ -1,8 +1,38 @@
 ---
+- name: Create the config folder
+  ansible.builtin.file:
+    path: "{{ docker_dir }}/home-assistant"
+    owner: "{{ username }}"
+    state: directory
+    group: 101
+    mode: 0775
+
+- name: Verify if Traefik container (reverse proxy) is running
+  docker_container_info:
+    name: traefik
+  register: traefik_info
+
+- name: Copy the configuration.yaml file for Reverse Proxy setup
+  ansible.builtin.blockinfile:
+    block: |
+      http:
+        use_x_forwarded_for: true
+        trusted_proxies:
+          - {{ traefik_info.container.NetworkSettings.Networks.docker.IPAddress }}
+      # Configure a default setup of Home Assistant (frontend, api, etc)
+      default_config:
+    dest: "{{ docker_dir }}/home-assistant/configuration.yaml"
+    create: true
+    insertbefore: BOF
+    group: 101
+    mode: 0775
+  when: traefik_info.exists and traefik_info.container.State.Status == "running"
+
 - name: Create and run Home Assistant container
   docker_container:
     image: "lscr.io/linuxserver/homeassistant"
     name: "homeassistant"
+    restart: true
     env:
       "PUID": "1000"
       "PGID": "1000"
@@ -11,6 +41,11 @@
     volumes:
       - "{{ docker_dir }}/home-assistant:/config"
     network_mode: "host"
+    labels:
+      traefik.http.routers.homeassistant.rule: Host(`homeassistant.{{ domain }}`)
+      traefik.http.routers.homeassistant.entrypoints: https
+      traefik.http.routers.homeassistant.tls: "true"
+      traefik.http.services.homeassistant.loadbalancer.server.port: "8123"
     restart_policy: unless-stopped
 
 - name: Add CNAME entry for homeassistant

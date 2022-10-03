@@ -15,13 +15,17 @@
     group: 101
     mode: 0600
 
-
 - name: Copy the traefik.yml file
   ansible.builtin.template:
     src: traefik.yml.j2
     dest: "{{ docker_dir }}/traefik/traefik.yml"
     group: 101
     mode: 0775
+
+- name: Verify stats for "docker" network
+  docker_network_info:
+    name: docker
+  register: docker_net
 
 - name: Create and run Traefik container
   docker_container:
@@ -40,6 +44,8 @@
       - "{{ docker_dir }}/traefik/acme.json:/acme.json"
     networks:
       - name: docker
+    etc_hosts:
+      host.docker.internal: "{{ docker_net.network.IPAM.Config[0].Gateway }}"
     ports:
       - "80:80"
       - "443:443"
