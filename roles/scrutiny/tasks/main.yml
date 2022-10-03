@@ -17,6 +17,12 @@
       traefik.http.routers.scrutiny.entrypoints: https
       traefik.http.routers.scrutiny.tls: "true"
       traefik.http.services.scrutiny.loadbalancer.server.port: "8080"
+
+      homepage.name: "Scrutiny"
+      homepage.group: "Monitoring Tools"
+      homepage.href: "http://scrutiny.{{ domain }}"
+      homepage.description: "Disk Health Monitoring"
+      homepage.icon: "scrutiny.png"
     restart_policy: unless-stopped
 
 - name: Add CNAME entry for scrutiny

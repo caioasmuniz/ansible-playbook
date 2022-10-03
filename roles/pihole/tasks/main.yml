@@ -30,7 +30,6 @@
     owner: "{{ username }}"
     recurse: true
 
-
 - name: Copy the custom.list file
   ansible.builtin.template:
     src: custom.list.j2
@@ -73,4 +72,12 @@
       traefik.http.routers.pihole.entrypoints: https
       traefik.http.routers.pihole.tls: "true"
       traefik.http.services.pihole.loadbalancer.server.port: "80"
+
+      homepage.name: "Pi-Hole"
+      homepage.group: "Networks Tools"
+      homepage.href: "http://pihole.{{ domain }}"
+      homepage.description: "DNS server with Ad-Blocking capabilities"
+      homepage.icon: "pihole.png"
+      homepage.widget.type: pihole
+      homepage.widget.url: "https://pihole.{{ domain }}"
     restart_policy: unless-stopped

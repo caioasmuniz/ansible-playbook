@@ -18,6 +18,12 @@
       traefik.http.routers.sonarr.entrypoints: https
       traefik.http.routers.sonarr.tls: "true"
       traefik.http.services.sonarr.loadbalancer.server.port: "8989"
+
+      homepage.name: "Sonarr"
+      homepage.group: "Media Management"
+      homepage.href: "http://sonarr.{{ domain }}"
+      homepage.description: "Requester for TV Shows"
+      homepage.icon: "sonarr.png"
     restart_policy: unless-stopped
 
 - name: Add CNAME entry for sonarr

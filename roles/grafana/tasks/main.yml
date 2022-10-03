@@ -35,6 +35,13 @@
       traefik.http.routers.grafana.entrypoints: https
       traefik.http.routers.grafana.tls: "true"
       traefik.http.services.grafana.loadbalancer.server.port: "3000"
+
+      homepage.name: "Grafana"
+      homepage.group: "Monitoring Tools"
+      homepage.href: "http://grafana.{{ domain }}"
+      homepage.description: "Dashboard-based Observability Tool"
+      homepage.icon: "grafana.png"
+
     restart_policy: unless-stopped
 
 - name: Add CNAME entry for grafana

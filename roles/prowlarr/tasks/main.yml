@@ -17,6 +17,12 @@
       traefik.http.routers.prowlarr.entrypoints: https
       traefik.http.routers.prowlarr.tls: "true"
       traefik.http.services.prowlarr.loadbalancer.server.port: "9696"
+
+      homepage.name: "Prowlarr"
+      homepage.group: "Media Management"
+      homepage.href: "http://prowlarr.{{ domain }}"
+      homepage.description: "Indexer Manager for *arr apps"
+      homepage.icon: "prowlarr.png"
     restart_policy: unless-stopped
 
 - name: Add CNAME entry for prowlarr

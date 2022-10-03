@@ -18,6 +18,12 @@
       traefik.http.routers.lidarr.entrypoints: https
       traefik.http.routers.lidarr.tls: "true"
       traefik.http.services.lidarr.loadbalancer.server.port: "8686"
+
+      homepage.name: "Lidarr"
+      homepage.group: "Media Management"
+      homepage.href: "http://lidarr.{{ domain }}"
+      homepage.description: "Requester for Music"
+      homepage.icon: "lidarr.png"
     restart_policy: unless-stopped
 
 - name: Add CNAME entry for lidarr

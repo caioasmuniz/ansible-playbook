@@ -33,6 +33,12 @@
       traefik.http.routers.nextcloud.tls: "true"
       traefik.http.services.nextcloud.loadbalancer.server.scheme: https
       traefik.http.services.nextcloud.loadbalancer.server.port: "443"
+
+      homepage.name: "Nextcloud"
+      homepage.group: "Main Apps"
+      homepage.href: "http://nextcloud.{{ domain }}"
+      homepage.description: "Personal Cloud Storage"
+      homepage.icon: "nextcloud.png"
     restart_policy: unless-stopped
 
 - name: Add CNAME entry for nextcloud

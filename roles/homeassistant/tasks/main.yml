@@ -46,6 +46,12 @@
       traefik.http.routers.homeassistant.entrypoints: https
       traefik.http.routers.homeassistant.tls: "true"
       traefik.http.services.homeassistant.loadbalancer.server.port: "8123"
+
+      homepage.name: "Home Assistant"
+      homepage.group: "Main Apps"
+      homepage.href: "http://homeassistant.{{ domain }}"
+      homepage.description: "Smart Home Control Hub"
+      homepage.icon: "home-assistant.png"
     restart_policy: unless-stopped
 
 - name: Add CNAME entry for homeassistant

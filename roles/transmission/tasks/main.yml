@@ -21,6 +21,12 @@
       traefik.http.routers.transmission.entrypoints: https
       traefik.http.routers.transmission.tls: "true"
       traefik.http.services.transmission.loadbalancer.server.port: "9091"
+
+      homepage.name: "Transmission"
+      homepage.group: "Media Management"
+      homepage.href: "http://transmission.{{ domain }}"
+      homepage.description: "BitTorrent Client"
+      homepage.icon: "transmission.png"
     restart_policy: unless-stopped
 
 - name: Add CNAME entry for transmission

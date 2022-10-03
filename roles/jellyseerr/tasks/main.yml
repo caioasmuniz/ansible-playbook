@@ -17,6 +17,12 @@
       traefik.http.routers.jellyseerr.entrypoints: https
       traefik.http.routers.jellyseerr.tls: "true"
       traefik.http.services.jellyseerr.loadbalancer.server.port: "5055"
+
+      homepage.name: "Jellyseerr"
+      homepage.group: "Main Apps"
+      homepage.href: "http://jellyseerr.{{ domain }}"
+      homepage.description: "Interface for Media Requests"
+      homepage.icon: "jellyseerr.png"
     restart_policy: unless-stopped
 
 - name: Add CNAME entry for jellyseerr

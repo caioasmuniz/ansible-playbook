@@ -61,6 +61,14 @@
       traefik.http.routers.traefik.tls.certresolver: duckdns
       traefik.http.routers.traefik.tls.domains[0].main: "{{ domain }}"
       traefik.http.routers.traefik.tls.domains[0].sans: "*.{{ domain }}"
+
+      homepage.name: "Traefik"
+      homepage.group: "Networks Tools"
+      homepage.href: "http://traefik.{{ domain }}"
+      homepage.description: "Reverse Proxy"
+      homepage.icon: "traefik.png"
+      homepage.widget.type: traefik
+      homepage.widget.url: "http://traefik.{{ domain }}"
     restart_policy: unless-stopped
 
 - name: Add CNAME entry for traefik
