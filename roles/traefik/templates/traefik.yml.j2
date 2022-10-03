@@ -20,7 +20,7 @@ providers:
 certificatesResolvers:
   duckdns:
     acme:
-      email: "{{ email }}"
+      email: {{ email }}
       storage: "/acme.json"
       dnsChallenge:
         provider: duckdns
