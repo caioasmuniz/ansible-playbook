@@ -16,7 +16,7 @@
       - name: docker
     labels:
       traefik.http.routers.homarr.entrypoints: https
-      traefik.http.routers.homarr.rule: Host(`{{ domain }}`) || Host(`homarr.{{ domain }}`)
+      traefik.http.routers.homarr.rule: Host(`homarr.{{ domain }}`)
       traefik.http.routers.homarr.tls: "true"
       traefik.http.services.homarr.loadbalancer.server.port: "7575"
     restart_policy: unless-stopped
