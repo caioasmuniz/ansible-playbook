@@ -1,7 +1,8 @@
 ---
 - name: Add CNAME record for {{ subdomain }}
+  when: cname_file is defined
   ansible.builtin.lineinfile:
     insertafter: EOF
     line: "cname={{ subdomain }}.{{ domain }},{{ domain }}"
     path: "{{ docker_dir }}/pihole/dnsmasq.d/05-pihole-custom-cname.conf"
-  when: cname_file is defined
+  notify: Restart pihole

@@ -45,11 +45,6 @@
     mode: 0775
   register: cname_file
 
-- name: Add CNAME entry for pihole
-  ansible.builtin.import_tasks: add_cname_record.yml
-  vars:
-    subdomain: pihole
-
 - name: Create and run Pihole container
   docker_container:
     image: "pihole/pihole:latest"
@@ -75,9 +70,14 @@
 
       homepage.name: "Pi-Hole"
       homepage.group: "Networks Tools"
-      homepage.href: "http://pihole.{{ domain }}"
+      homepage.href: "http://pihole.{{ domain }}/admin"
       homepage.description: "DNS server with Ad-Blocking capabilities"
       homepage.icon: "pihole.png"
       homepage.widget.type: pihole
       homepage.widget.url: "https://pihole.{{ domain }}"
     restart_policy: unless-stopped
+
+- name: Add CNAME entry for pihole
+  ansible.builtin.import_tasks: add_cname_record.yml
+  vars:
+    subdomain: pihole
