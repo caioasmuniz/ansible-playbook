@@ -52,7 +52,7 @@
     restart_policy: unless-stopped
 
 - name: Add CNAME entry for homepage
-  ansible.builtin.include_role:
+  ansible.builtin.import_role:
     name: pihole
     tasks_from: add_cname_record.yml
   vars:
