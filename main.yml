@@ -1,37 +1,43 @@
 ---
-- hosts: all
-  name: Common Tasks
+- hosts: vps, home_server
+  name: Updating packages and installing docker
+  strategy: linear
   roles:
     - role: common
       tags:
         - common
-
-- hosts: vps, home_server
-  name: VPS and Home Server Tasks
-  roles:
     - role: docker
       tags:
         - docker
 
-- hosts: vps
-  name: VPS Tasks
+- hosts: home_server
+  name: Install Pihole in Home Server
+  strategy: linear
+  roles:
+    - role: pihole
+      tags:
+        - pihole
+
+- hosts: vps, home_server
+  name: Install Traefik in vps and Home server
+  strategy: free
   roles:
     - role: traefik
       tags:
         - traefik
+
+- hosts: vps
+  name: Install VPS's containers
+  strategy: linear
+  roles:
     - role: wireguard-server
       tags:
         - wireguard-server
 
 - hosts: home_server
-  name: Home Server Tasks
+  name: Install Home Server's containers
+  strategy: free
   roles:
-    - role: pihole
-      tags:
-        - pihole
-    - role: traefik
-      tags:
-        - traefik
     - role: nextcloud
       tags:
         - nextcloud
