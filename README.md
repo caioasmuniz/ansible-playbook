@@ -52,11 +52,11 @@ Ferramenta voltada para o controle, gerência, integração e automação de cas
 - Criação de automações baseadas em eventos capturados através das integrações.
 <br clear="left"/>
 
-## Homarr
+## Homepage
 
-<img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxhub/dashboard-icons/png/homarr.png">
+<img align="left" width="100" src="https://raw.githubusercontent.com/benphelps/homepage/main/public/favicon.ico">
 
-Este serviço apresenta uma *dashboard* em sua *interface web* com *links* para todos os outros serviços hospedados na rede. Desta forma, serve como um ponto de entrada para estas aplicações, além de funcionar como um "*hub*" do *home server*.
+Este serviço apresenta uma *dashboard* em sua *interface web* com *links* para todos os outros serviços hospedados na rede, servindo como um ponto de entrada para estas aplicações, além de funcionar como um "*hub*" do *home server*.
 <br clear="left"/>
 
 ## Media Server
