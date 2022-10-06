@@ -4,7 +4,24 @@ Este repositório contém uma coleção de *scripts*, usando *Ansible*, para o p
 
 Para lista de requisitos de *hardware* e instruções de instalação e *setup* do ambiente, acesse [INSTALL.md](INSTALL.md)
 
-Nesta coleção de *scripts*, são provisionados os seguintes serviços:
+Foram utilizadas as seguintes tecnologias para o desenvolvimento dos *scripts*:
+
+## Ansible
+
+<img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxhub/dashboard-icons/png/ansible.png">
+
+Ansible é uma ferramenta de automação para processos de TI, escrita em *Python*, desenvolvida por *Red Hat*, sendo capaz realizar tarefas como configuração de sistemas e implementação de aplicações.Para isso, utiliza-se de uma conexão *OpenSSH* para comunicação com os dispositivos a serem provisionados.
+
+Dentro da arquitetura de Ansible, existem dois agentes de rede, são eles:
+
+### *Control Node* (Nó de Controle)
+
+É o computador responsável por executar as ferramentas de linha de comando de *Ansible*. Neste projeto, este será referido como *Workstation*.
+
+### *Managed Node* (Nó Gerenciado)
+
+Estes são os dispositivos-alvo dos *scripts*, ou seja, os nós a serem gerenciados por *Ansible*. Neste projeto, os *managed nodes* serão o servidor local (*home server*) e o servidor virtual privado (*VPS*).
+<br clear="left"/>
 
 ## Traefik
 
