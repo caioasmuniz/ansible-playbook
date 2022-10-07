@@ -23,12 +23,12 @@
     mode: 0775
 
 - name: Verify stats for "docker" network
-  docker_network_info:
+  community.docker.docker_network_info:
     name: docker
   register: docker_net
 
 - name: Create and run Traefik container
-  docker_container:
+  community.docker.docker_container:
     image: "traefik:latest"
     name: "traefik"
     restart: true

@@ -1,6 +1,6 @@
 ---
 - name: Create and run Lidarr container
-  docker_container:
+  community.docker.docker_container:
     image: "lscr.io/linuxserver/lidarr"
     name: "lidarr"
     env:

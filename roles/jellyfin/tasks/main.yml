@@ -1,6 +1,6 @@
 ---
 - name: Create and run Jellyfin container
-  docker_container:
+  community.docker.docker_container:
     image: "lscr.io/linuxserver/jellyfin"
     name: "jellyfin"
     env:

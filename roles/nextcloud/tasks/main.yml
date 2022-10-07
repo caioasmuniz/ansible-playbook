@@ -1,6 +1,6 @@
 ---
 - name: Create and run MariaDB container
-  docker_container:
+  community.docker.docker_container:
     name: "mariadb"
     image: "lscr.io/linuxserver/mariadb"
     env:
@@ -14,7 +14,7 @@
     restart_policy: unless-stopped
 
 - name: Create and run Nextcloud container
-  docker_container:
+  community.docker.docker_container:
     image: "lscr.io/linuxserver/nextcloud"
     name: "nextcloud"
     env:

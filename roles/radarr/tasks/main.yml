@@ -1,6 +1,6 @@
 ---
 - name: Create and run Radarr container
-  docker_container:
+  community.docker.docker_container:
     image: "lscr.io/linuxserver/radarr"
     name: "radarr"
     env:

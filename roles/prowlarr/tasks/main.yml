@@ -1,6 +1,6 @@
 ---
 - name: Create and run Prowlarr container
-  docker_container:
+  community.docker.docker_container:
     image: "lscr.io/linuxserver/prowlarr:develop"
     name: "prowlarr"
     env:

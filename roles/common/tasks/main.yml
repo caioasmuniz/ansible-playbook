@@ -7,7 +7,7 @@
   when: ansible_distribution == "Ubuntu"
 - name: Install updates (Arch Linux)
   become: true
-  pacman:
+  ansible.builtin.pacman:
     update_cache: true
     upgrade: true
   when: ansible_distribution == "Archlinux"

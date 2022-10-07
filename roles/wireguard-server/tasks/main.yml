@@ -1,7 +1,7 @@
 ---
 
 - name: Create and run Wg-Easy container
-  docker_container:
+  community.docker.docker_container:
     name: "wireguard"
     image: "weejewel/wg-easy"
     networks:

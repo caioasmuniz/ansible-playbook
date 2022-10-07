@@ -8,7 +8,7 @@
     mode: 0775
 
 - name: Verify if Traefik container (reverse proxy) is running
-  docker_container_info:
+  community.docker.docker_container_info:
     name: traefik
   register: traefik_info
 
@@ -29,7 +29,7 @@
   when: traefik_info.exists and traefik_info.container.State.Status == "running"
 
 - name: Create and run Home Assistant container
-  docker_container:
+  community.docker.docker_container:
     image: "lscr.io/linuxserver/homeassistant"
     name: "homeassistant"
     restart: true

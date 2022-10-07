@@ -1,6 +1,6 @@
 ---
 - name: Create and run Wireguard Client container
-  docker_container:
+  community.docker.docker_container:
     name: "wireguard-client"
     image: "lscr.io/linuxserver/wireguard:latest"
     capabilities:

@@ -1,6 +1,6 @@
 ---
 - name: Create and run Transmission container
-  docker_container:
+  community.docker.docker_container:
     image: "lscr.io/linuxserver/transmission"
     name: "transmission"
     env:

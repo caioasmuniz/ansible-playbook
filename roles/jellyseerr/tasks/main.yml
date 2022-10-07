@@ -1,6 +1,6 @@
 ---
 - name: Create and run Jellyseerr container
-  docker_container:
+  community.docker.docker_container:
     image: "fallenbagel/jellyseerr:latest"
     name: "jellyseerr"
     env:

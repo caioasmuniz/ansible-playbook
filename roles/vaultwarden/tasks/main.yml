@@ -1,6 +1,6 @@
 ---
 - name: Create and run Vaultwarden container
-  docker_container:
+  community.docker.docker_container:
     image: "vaultwarden/server:latest"
     name: "vaultwarden"
     env:

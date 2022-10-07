@@ -15,7 +15,7 @@
     mode: 0775
 
 - name: Create and run Prometheus container
-  docker_container:
+  community.docker.docker_container:
     image: "prom/prometheus:latest"
     name: "prometheus"
     restart: true

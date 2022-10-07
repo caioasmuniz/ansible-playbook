@@ -1,6 +1,6 @@
 ---
 - name: Create and run scrutiny container
-  docker_container:
+  community.docker.docker_container:
     name: "scrutiny"
     image: "ghcr.io/analogj/scrutiny:master-omnibus"
     capabilities:

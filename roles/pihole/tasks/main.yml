@@ -46,7 +46,7 @@
   register: cname_file
 
 - name: Create and run Pihole container
-  docker_container:
+  community.docker.docker_container:
     image: "pihole/pihole:latest"
     name: "pihole"
     env:
