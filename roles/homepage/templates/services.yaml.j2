@@ -1,4 +1,7 @@
-- Main Apps:
-- Media Management:
-- Networks Tools:
-- Monitoring Tools:
+- Routers:
+{% for entry in extra_hosts %}
+    - {{ entry.display_name }}:
+        href: {{ entry.domain_name }}
+        icon: "{{ entry.icon }}.png"
+        description: "{{ entry.description }}"
+{% endfor %}

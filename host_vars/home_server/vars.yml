@@ -1,4 +1,5 @@
 media_dir: "/home/{{ ansible_user }}/library"
 docker_dir: "/home/{{ ansible_user }}/.config"
 wireguard_host: "{{ ansible_host }}"
-pihole_extra_dns_entries: "{{ vault_pihole_extra_dns_entries }}"
+extra_hosts: "{{ vault_extra_hosts }}"
+vaultwarden_token: "{{ vault_vaultwarden_token }}"
