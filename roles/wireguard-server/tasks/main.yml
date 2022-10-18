@@ -13,7 +13,7 @@
       - net_admin
       - sys_module
     env:
-      WG_HOST: "{{ wireguard_host }}"
+      WG_HOST: "{{ ansible_host }}"
       WG_ALLOWED_IPS: "10.8.0.0/24, {{ wireguard_extra_allowed_ips }}"
       WG_DEFAULT_DNS: "{{ wireguard_dns }}"
     ports:
@@ -26,6 +26,12 @@
       traefik.http.routers.wireguard.tls: "true"
       traefik.http.services.wireguard.loadbalancer.server.port: "51821"
       traefik.http.routers.wireguard.middlewares: auth
+
+      homepage.name: "Wireguard Server"
+      homepage.group: "Main Apps"
+      homepage.href: "http://wireguard.{{ domain_name }}"
+      homepage.description: "Dashboard for wireguard VPN service"
+      homepage.icon: "wireguard.png"
     restart_policy: unless-stopped
 
 - name: Add CNAME entry for wireguard
