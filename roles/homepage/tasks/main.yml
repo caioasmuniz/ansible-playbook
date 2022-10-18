@@ -32,6 +32,7 @@
   community.docker.docker_container:
     image: "ghcr.io/benphelps/homepage:latest"
     name: "homepage"
+    pull: true
     restart: true
     env:
       "PUID": "1000"

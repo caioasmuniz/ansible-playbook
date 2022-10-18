@@ -18,8 +18,8 @@
   community.docker.docker_container:
     image: "prom/prometheus:latest"
     name: "prometheus"
+    pull: true
     restart: true
-
     env:
       "TZ": "America/Sao_Paulo"
     volumes:

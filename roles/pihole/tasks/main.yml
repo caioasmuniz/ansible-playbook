@@ -49,6 +49,7 @@
   community.docker.docker_container:
     image: "pihole/pihole:latest"
     name: "pihole"
+    pull: true
     env:
       "PUID": "1000"
       "PGID": "1000"

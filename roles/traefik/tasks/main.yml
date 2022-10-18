@@ -31,6 +31,7 @@
   community.docker.docker_container:
     image: "traefik:latest"
     name: "traefik"
+    pull: true
     restart: true
     env:
       "PUID": "1000"

@@ -3,6 +3,7 @@
   community.docker.docker_container:
     name: "wireguard-client"
     image: "lscr.io/linuxserver/wireguard:latest"
+    pull: true
     capabilities:
       - net_admin
       - sys_module

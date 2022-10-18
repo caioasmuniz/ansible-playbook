@@ -3,6 +3,7 @@
   community.docker.docker_container:
     image: "lscr.io/linuxserver/jellyfin"
     name: "jellyfin"
+    pull: true
     env:
       "PUID": "1000"
       "PGID": "1000"

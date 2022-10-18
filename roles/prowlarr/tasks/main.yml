@@ -3,6 +3,7 @@
   community.docker.docker_container:
     image: "lscr.io/linuxserver/prowlarr:develop"
     name: "prowlarr"
+    pull: true
     env:
       "PUID": "1000"
       "PGID": "1000"

@@ -3,6 +3,7 @@
   community.docker.docker_container:
     name: "mariadb"
     image: "lscr.io/linuxserver/mariadb"
+    pull: true
     env:
       "PUID": "1000"
       "PGID": "1000"
