@@ -28,7 +28,7 @@
     networks:
       - name: docker
     labels:
-      traefik.http.routers.nextcloud.rule: Host(`nextcloud.{{ domain }}`)
+      traefik.http.routers.nextcloud.rule: Host(`nextcloud.{{ domain_name }}`)
       traefik.http.routers.nextcloud.entrypoints: https
       traefik.http.routers.nextcloud.tls: "true"
       traefik.http.services.nextcloud.loadbalancer.server.scheme: https
@@ -36,7 +36,7 @@
 
       homepage.name: "Nextcloud"
       homepage.group: "Main Apps"
-      homepage.href: "http://nextcloud.{{ domain }}"
+      homepage.href: "http://nextcloud.{{ domain_name }}"
       homepage.description: "Personal Cloud Storage"
       homepage.icon: "nextcloud.png"
     restart_policy: unless-stopped

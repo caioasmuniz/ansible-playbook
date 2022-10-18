@@ -2,7 +2,7 @@
 - name: Create the config folder
   ansible.builtin.file:
     path: "{{ docker_dir }}/homepage"
-    owner: "{{ username }}"
+    owner: "{{ ansible_user }}"
     state: directory
     group: 101
     mode: 0775
@@ -45,7 +45,7 @@
       - name: docker
     labels:
       traefik.http.routers.homepage.entrypoints: https
-      traefik.http.routers.homepage.rule: Host(`{{ domain }}`) || Host(`homepage.{{ domain }}`)
+      traefik.http.routers.homepage.rule: Host(`{{ domain_name }}`) || Host(`homepage.{{ domain_name }}`)
       traefik.http.routers.homepage.tls: "true"
       traefik.http.services.homepage.loadbalancer.server.port: "3000"
 

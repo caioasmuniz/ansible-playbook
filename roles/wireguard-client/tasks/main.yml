@@ -10,7 +10,7 @@
       PUID: "1000"
       PGID: "1000"
       TZ: "America/Sao_Paulo"
-      SERVERURL: "{{ domain }}"
+      SERVERURL: "{{ domain_name }}"
       ALLOWEDIPS: "10.8.0.0/24"
     network_mode: host
     volumes:

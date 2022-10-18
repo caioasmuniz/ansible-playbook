@@ -3,6 +3,6 @@
   when: cname_file is defined
   ansible.builtin.lineinfile:
     insertafter: EOF
-    line: "cname={{ subdomain }}.{{ domain }},{{ domain }}"
+    line: "cname={{ subdomain }}.{{ domain_name }},{{ domain_name }}"
     path: "{{ docker_dir }}/pihole/dnsmasq.d/05-pihole-custom-cname.conf"
   notify: Restart pihole

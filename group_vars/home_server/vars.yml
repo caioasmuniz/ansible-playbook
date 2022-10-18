@@ -1,4 +1,0 @@
-media_dir: "/home/{{ username }}/library"
-docker_dir: "/home/{{ username }}/.config"
-wireguard_host: "{{ ip }}"
-pihole_extra_dns_entries: "{{ vault_pihole_extra_dns_entries }}"

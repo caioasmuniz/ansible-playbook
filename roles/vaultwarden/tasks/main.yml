@@ -14,14 +14,14 @@
     networks:
       - name: docker
     labels:
-      traefik.http.routers.vaultwarden.rule: Host(`vaultwarden.{{ domain }}`)
+      traefik.http.routers.vaultwarden.rule: Host(`vaultwarden.{{ domain_name }}`)
       traefik.http.routers.vaultwarden.entrypoints: https
       traefik.http.routers.vaultwarden.tls: "true"
       traefik.http.services.vaultwarden.loadbalancer.server.port: "80"
 
       homepage.name: "Vaultwarden"
       homepage.group: "Main Apps"
-      homepage.href: "http://vaultwarden.{{ domain }}/admin"
+      homepage.href: "http://vaultwarden.{{ domain_name }}/admin"
       homepage.description: "Bitwarden-based Password Manager"
       homepage.icon: "vaultwarden.png"
     restart_policy: unless-stopped

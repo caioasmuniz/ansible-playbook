@@ -2,7 +2,7 @@
 - name: Create the config folder
   ansible.builtin.file:
     path: "{{ docker_dir }}/home-assistant"
-    owner: "{{ username }}"
+    owner: "{{ ansible_user }}"
     state: directory
     group: 101
     mode: 0775
@@ -42,14 +42,14 @@
       - "{{ docker_dir }}/home-assistant:/config"
     network_mode: "host"
     labels:
-      traefik.http.routers.homeassistant.rule: Host(`homeassistant.{{ domain }}`)
+      traefik.http.routers.homeassistant.rule: Host(`homeassistant.{{ domain_name }}`)
       traefik.http.routers.homeassistant.entrypoints: https
       traefik.http.routers.homeassistant.tls: "true"
       traefik.http.services.homeassistant.loadbalancer.server.port: "8123"
 
       homepage.name: "Home Assistant"
       homepage.group: "Main Apps"
-      homepage.href: "http://homeassistant.{{ domain }}"
+      homepage.href: "http://homeassistant.{{ domain_name }}"
       homepage.description: "Smart Home Control Hub"
       homepage.icon: "home-assistant.png"
     restart_policy: unless-stopped

@@ -14,14 +14,14 @@
     networks:
       - name: docker
     labels:
-      traefik.http.routers.radarr.rule: Host(`radarr.{{ domain }}`)
+      traefik.http.routers.radarr.rule: Host(`radarr.{{ domain_name }}`)
       traefik.http.routers.radarr.entrypoints: https
       traefik.http.routers.radarr.tls: "true"
       traefik.http.services.radarr.loadbalancer.server.port: "7878"
 
       homepage.name: "Radarr"
       homepage.group: "Media Management"
-      homepage.href: "http://radarr.{{ domain }}"
+      homepage.href: "http://radarr.{{ domain_name }}"
       homepage.description: "Requester for Movies"
       homepage.icon: "radarr.png"
     restart_policy: unless-stopped

@@ -52,7 +52,7 @@
 
 - name: Add user to the docker group
   ansible.builtin.user:
-    name: "{{ username }}"
+    name: "{{ ansible_user }}"
     groups:
       - docker
     append: true
@@ -73,7 +73,7 @@
   ansible.builtin.file:
     dest: "{{ docker_dir }}"
     state: directory
-    owner: "{{ username }}"
+    owner: "{{ ansible_user }}"
     mode: "0775"
     group: "users"
 

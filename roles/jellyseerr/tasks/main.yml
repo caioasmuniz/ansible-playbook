@@ -13,14 +13,14 @@
     networks:
       - name: docker
     labels:
-      traefik.http.routers.jellyseerr.rule: Host(`jellyseerr.{{ domain }}`)
+      traefik.http.routers.jellyseerr.rule: Host(`jellyseerr.{{ domain_name }}`)
       traefik.http.routers.jellyseerr.entrypoints: https
       traefik.http.routers.jellyseerr.tls: "true"
       traefik.http.services.jellyseerr.loadbalancer.server.port: "5055"
 
       homepage.name: "Jellyseerr"
       homepage.group: "Main Apps"
-      homepage.href: "http://jellyseerr.{{ domain }}"
+      homepage.href: "http://jellyseerr.{{ domain_name }}"
       homepage.description: "Interface for Media Requests"
       homepage.icon: "jellyseerr.png"
     restart_policy: unless-stopped

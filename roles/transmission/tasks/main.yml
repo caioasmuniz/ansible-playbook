@@ -17,14 +17,14 @@
       - "51413:51413"
       - "51413:51413/udp"
     labels:
-      traefik.http.routers.transmission.rule: Host(`transmission.{{ domain }}`)
+      traefik.http.routers.transmission.rule: Host(`transmission.{{ domain_name }}`)
       traefik.http.routers.transmission.entrypoints: https
       traefik.http.routers.transmission.tls: "true"
       traefik.http.services.transmission.loadbalancer.server.port: "9091"
 
       homepage.name: "Transmission"
       homepage.group: "Media Management"
-      homepage.href: "http://transmission.{{ domain }}"
+      homepage.href: "http://transmission.{{ domain_name }}"
       homepage.description: "BitTorrent Client"
       homepage.icon: "transmission.png"
     restart_policy: unless-stopped

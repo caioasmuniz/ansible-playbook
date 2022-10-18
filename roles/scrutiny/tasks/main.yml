@@ -16,14 +16,14 @@
     networks:
       - name: docker
     labels:
-      traefik.http.routers.scrutiny.rule: Host(`scrutiny.{{ domain }}`)
+      traefik.http.routers.scrutiny.rule: Host(`scrutiny.{{ domain_name }}`)
       traefik.http.routers.scrutiny.entrypoints: https
       traefik.http.routers.scrutiny.tls: "true"
       traefik.http.services.scrutiny.loadbalancer.server.port: "8080"
 
       homepage.name: "Scrutiny"
       homepage.group: "Monitoring Tools"
-      homepage.href: "http://scrutiny.{{ domain }}"
+      homepage.href: "http://scrutiny.{{ domain_name }}"
       homepage.description: "Disk Health Monitoring"
       homepage.icon: "scrutiny.png"
     restart_policy: unless-stopped

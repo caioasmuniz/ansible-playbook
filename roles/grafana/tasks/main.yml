@@ -2,7 +2,7 @@
 - name: Create the config folder
   ansible.builtin.file:
     path: "{{ docker_dir }}/grafana/config"
-    owner: "{{ username }}"
+    owner: "{{ ansible_user }}"
     state: directory
     group: 101
     mode: 0775
@@ -31,14 +31,14 @@
     networks:
       - name: docker
     labels:
-      traefik.http.routers.grafana.rule: Host(`grafana.{{ domain }}`)
+      traefik.http.routers.grafana.rule: Host(`grafana.{{ domain_name }}`)
       traefik.http.routers.grafana.entrypoints: https
       traefik.http.routers.grafana.tls: "true"
       traefik.http.services.grafana.loadbalancer.server.port: "3000"
 
       homepage.name: "Grafana"
       homepage.group: "Monitoring Tools"
-      homepage.href: "http://grafana.{{ domain }}"
+      homepage.href: "http://grafana.{{ domain_name }}"
       homepage.description: "Dashboard-based Observability Tool"
       homepage.icon: "grafana.png"
 

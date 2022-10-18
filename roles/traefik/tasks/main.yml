@@ -2,7 +2,7 @@
 - name: Create the config folder
   ansible.builtin.file:
     path: "{{ docker_dir }}/traefik"
-    owner: "{{ username }}"
+    owner: "{{ ansible_user }}"
     state: directory
     group: 101
     mode: 0775
@@ -11,7 +11,7 @@
   ansible.builtin.file:
     path: "{{ docker_dir }}/traefik/acme.json"
     state: touch
-    owner: "{{ username }}"
+    owner: "{{ ansible_user }}"
     group: 101
     mode: 0600
 
@@ -54,21 +54,21 @@
     labels:
       traefik.http.middlewares.auth.basicauth.users: "{{ auth_credentials }}"
       traefik.http.routers.traefik.entrypoints: https
-      traefik.http.routers.traefik.rule: Host(`traefik.{{ domain }}`)
+      traefik.http.routers.traefik.rule: Host(`traefik.{{ domain_name }}`)
       traefik.http.routers.traefik.service: api@internal
       traefik.http.routers.traefik.middlewares: auth
       traefik.http.routers.traefik.tls: "true"
       traefik.http.routers.traefik.tls.certresolver: duckdns
-      traefik.http.routers.traefik.tls.domains[0].main: "{{ domain }}"
-      traefik.http.routers.traefik.tls.domains[0].sans: "*.{{ domain }}"
+      traefik.http.routers.traefik.tls.domains[0].main: "{{ domain_name }}"
+      traefik.http.routers.traefik.tls.domains[0].sans: "*.{{ domain_name }}"
 
       homepage.name: "Traefik"
       homepage.group: "Networks Tools"
-      homepage.href: "http://traefik.{{ domain }}"
+      homepage.href: "http://traefik.{{ domain_name }}"
       homepage.description: "Reverse Proxy"
       homepage.icon: "traefik.png"
       homepage.widget.type: traefik
-      homepage.widget.url: "http://traefik.{{ domain }}"
+      homepage.widget.url: "http://traefik.{{ domain_name }}"
     restart_policy: unless-stopped
 
 - name: Add CNAME entry for traefik

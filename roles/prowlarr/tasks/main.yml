@@ -13,14 +13,14 @@
     networks:
       - name: docker
     labels:
-      traefik.http.routers.prowlarr.rule: Host(`prowlarr.{{ domain }}`)
+      traefik.http.routers.prowlarr.rule: Host(`prowlarr.{{ domain_name }}`)
       traefik.http.routers.prowlarr.entrypoints: https
       traefik.http.routers.prowlarr.tls: "true"
       traefik.http.services.prowlarr.loadbalancer.server.port: "9696"
 
       homepage.name: "Prowlarr"
       homepage.group: "Media Management"
-      homepage.href: "http://prowlarr.{{ domain }}"
+      homepage.href: "http://prowlarr.{{ domain_name }}"
       homepage.description: "Indexer Manager for *arr apps"
       homepage.icon: "prowlarr.png"
     restart_policy: unless-stopped

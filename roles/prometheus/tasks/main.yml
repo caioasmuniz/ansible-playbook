@@ -2,7 +2,7 @@
 - name: Create the config folder
   ansible.builtin.file:
     path: "{{ docker_dir }}/prometheus"
-    owner: "{{ username }}"
+    owner: "{{ ansible_user }}"
     state: directory
     group: 101
     mode: 0775
@@ -27,14 +27,14 @@
     networks:
       - name: docker
     labels:
-      traefik.http.routers.prometheus.rule: Host(`prometheus.{{ domain }}`)
+      traefik.http.routers.prometheus.rule: Host(`prometheus.{{ domain_name }}`)
       traefik.http.routers.prometheus.entrypoints: https
       traefik.http.routers.prometheus.tls: "true"
       traefik.http.services.prometheus.loadbalancer.server.port: "9090"
 
       homepage.name: "Prometheus"
       homepage.group: "Monitoring Tools"
-      homepage.href: "http://prometheus.{{ domain }}"
+      homepage.href: "http://prometheus.{{ domain_name }}"
       homepage.description: "Metrics-based Monitoring Tool"
       homepage.icon: "prometheus.png"
     restart_policy: unless-stopped

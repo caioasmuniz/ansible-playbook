@@ -1,20 +1,11 @@
 all:
-  children:
-    workstations:
-      hosts:
-        localhost:
-          ansible_conection: local
+  hosts:
     vps:
-      hosts: 
-        user@192.168.23.200:
-          username: user
-          ip: 192.168.23.200
-          domain: example.org
-
+      ansible_user: user
+      ansible_host: 192.168.23.200
+      domain_name: example.org
     home_server:
-      hosts: 
-        user@192.168.23.200:
-            username: user
-            ip: 192.168.23.200
-            domain: example.net
-
+      ansible_user: user
+      ansible_host: 192.168.23.200
+      domain_name: example.net
+    
