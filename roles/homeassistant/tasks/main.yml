@@ -12,7 +12,7 @@
     name: traefik
   register: traefik_info
 
-- name: Copy the configuration.yaml file for Reverse Proxy setup
+- name: Edit the configuration.yaml file for Reverse Proxy setup
   ansible.builtin.blockinfile:
     block: |
       http:

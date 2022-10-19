@@ -75,7 +75,7 @@
       homepage.description: "DNS server with Ad-Blocking capabilities"
       homepage.icon: "pihole.png"
       homepage.widget.type: pihole
-      homepage.widget.url: "https://pihole.{{ domain_name }}"
+      homepage.widget.url: "http://pihole"
     restart_policy: unless-stopped
 
 - name: Add CNAME entry for pihole
