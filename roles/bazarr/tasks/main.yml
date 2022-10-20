@@ -1,0 +1,37 @@
+---
+- name: Create and run Bazarr container
+  community.docker.docker_container:
+    image: "lscr.io/linuxserver/bazarr:latest"
+    name: "bazarr"
+    pull: true
+    env:
+      "PUID": "1000"
+      "PGID": "1000"
+      "UMASK": "002"
+      "TZ": "America/Sao_Paulo"
+    volumes:
+      - "{{ docker_dir }}/bazarr:/config"
+      - "{{ media_dir }}:/data"
+    networks:
+      - name: docker
+    labels:
+      traefik.http.routers.bazarr.rule: Host(`bazarr.{{ domain_name }}`)
+      traefik.http.routers.bazarr.entrypoints: https
+      traefik.http.routers.bazarr.tls: "true"
+      traefik.http.services.bazarr.loadbalancer.server.port: "6767"
+
+      homepage.name: "Bazarr"
+      homepage.group: "Media Management"
+      homepage.href: "http://bazarr.{{ domain_name }}"
+      homepage.description: "Requester for Subtittles"
+      homepage.icon: "bazarr.png"
+      homepage.widget.type: bazarr
+      homepage.widget.url: "http://bazarr:6767"
+    restart_policy: unless-stopped
+
+- name: Add CNAME entry for bazarr
+  ansible.builtin.import_role:
+    name: pihole
+    tasks_from: add_cname_record.yml
+  vars:
+    subdomain: bazarr
