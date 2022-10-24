@@ -25,6 +25,10 @@
       homepage.href: "http://sonarr.{{ domain_name }}"
       homepage.description: "Requester for TV Shows"
       homepage.icon: "sonarr.png"
+      # homepage.widget.type: sonarr
+      # homepage.widget.url: "http://sonarr:8989"
+      # homepage.widget.key: ""
+
     restart_policy: unless-stopped
 
 - name: Add CNAME entry for sonarr

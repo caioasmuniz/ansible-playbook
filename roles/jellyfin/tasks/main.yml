@@ -24,6 +24,9 @@
       homepage.href: "http://jellyfin.{{ domain_name }}"
       homepage.description: "Unified media server"
       homepage.icon: "jellyfin.png"
+      # homepage.widget.type: jellyfin
+      # homepage.widget.url: "http://host.docker.internal:8096"
+      # homepage.widget.key: ""
     restart_policy: unless-stopped
 
 - name: Add CNAME entry for jellyfin

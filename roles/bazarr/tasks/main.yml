@@ -25,8 +25,9 @@
       homepage.href: "http://bazarr.{{ domain_name }}"
       homepage.description: "Requester for Subtittles"
       homepage.icon: "bazarr.png"
-      homepage.widget.type: bazarr
-      homepage.widget.url: "http://bazarr:6767"
+      # homepage.widget.type: bazarr
+      # homepage.widget.url: "http://bazarr:6767"
+      # homepage.widget.key: ""
     restart_policy: unless-stopped
 
 - name: Add CNAME entry for bazarr
