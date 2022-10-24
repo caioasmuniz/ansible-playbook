@@ -68,6 +68,9 @@
     - role: sonarr
       tags:
         - sonarr
+    - role: bazarr
+      tags:
+        - bazarr
     - role: wireguard-client
       tags:
         - wireguard-client
