@@ -48,23 +48,29 @@ Uma das vantagens da utilização de um *proxy* reverso é a adição de funcion
 
 <img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxhub/dashboard-icons/png/pihole.png">
 
-Servidor *DNS*(*Domain Name System*). Age como um bloqueador de anúncios em toda a rede local, sob o princípio de *DNS sinkhole*, ou seja, envia endereços não-roteáveis para um conjunto específico de domínios, neste caso, provedores de anúncios como, por exemplo, o *Google Ads*.
+Servidor *DNS*(*Domain Name System*). Age como um bloqueador de anúncios em toda a rede local, sob o princípio de *DNS sinkhole*, ou seja, envia endereços não-roteáveis para um conjunto específico de domínios, neste caso, provedores de anúncios como, por exemplo, o *Google Ads*. [^pihole-overview]  
 
   Também é utilizado nesta aplicação como um servidor de *DNS* local, sendo capaz de resolver endereços internos da rede local, permitindo o acesso aos serviços utilizando um nome de domínio/subdomínio como `home.lan`, ao invés de um endereço IP como `192.168.10.35`.
 <br clear="left"/>
+
+[^pihole-overview]: https://docs.pi-hole.net/
 
 ## Nextcloud
 
 <img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxhub/dashboard-icons/png/nextcloud.png">
 
-Serviço que opera como uma nuvem privada, sendo um substituto auto-hospedado à serviços como *Google Drive*, *Dropbox* e *iCloud*. Algumas das funções presentes são:
+Serviço que opera como uma nuvem privada, sendo um substituto auto-hospedado à serviços como *Google Drive*, *Dropbox* e *iCloud*. Algumas das funções presentes na aplicação são:
 
-- *Backup* automático de diretórios utilizando clientes do *Nextcloud*, disponíveis para Android, iOS, Windows, Linux e macOS. Com foco no *backup* automático de fotos nos clientes *mobile* (*Android* e *iOS*), funcionalidade parecida com a apresentada por *Google Photos*;
+- *Backup* automático de diretórios utilizando clientes do *Nextcloud*, disponíveis para *Android*, *iOS*, *Windows*, *Linux* e *macOS*[^nextcloud-clients].  Possui também *backup* automático de fotos nos clientes *mobile* (*Android* e *iOS*), funcionalidade parecida com a apresentada por *Google Photos*;
 
-- Função de gerência e sincronização de calendários, contatos e histórico de ligações, através dos protocolos CardDAV, CalDAV e Webcal.
+- Função de gerência e sincronização de calendários, contatos, histórico de ligações e listas de tarefas; através dos protocolos *CardDAV*, *CalDAV* e *Webcal*.[^nextcloud-sync]
 
-- Presença de uma *interface web* e aplicativos de clientes com uma experiência que remete à de serviços baseados em nuvem como *Google Drive*.
+- Presença de uma *interface web* e aplicativos de clientes com uma experiência que remete à de serviços baseados em nuvem como *Google Drive*. [^nextcloud-web-ui]
 <br clear="left"/>
+
+[^nextcloud-sync]: https://docs.nextcloud.com/server/latest/user_manual/en/groupware/index.html
+[^nextcloud-web-ui]: https://docs.nextcloud.com/server/latest/user_manual/en/webinterface.html
+[^nextcloud-clients]: https://docs.nextcloud.com/server/latest/user_manual/en/files/desktop_mobile_sync.html#
 
 ## Home Assistant
 
