@@ -33,13 +33,16 @@ Estes são os dispositivos-alvo dos *scripts*, ou seja, os nós a serem gerencia
 
 Uma das vantagens da utilização de um *proxy* reverso é a adição de funcionalidades ao tratamento de requisições como:
 
-- Redirecionamento automático de HTTP para HTTPS;
-- Suporte à HTTPS para serviços que não o fazem nativamente;
-- Suporte à autenticação/*SSO* (*Single Sign-On*);
-- Gerenciamento e auto-renovação de certificados digitais, assinados por *Let's Encrypt*.
+- Suporte à HTTPS para serviços que não o fazem nativamente; [^traefik-http-redirect]
+- Redirecionamento automático de tráfego HTTP para HTTPS; [^traefik-http-redirect]
+- Suporte à autenticação/*SSO* (*Single Sign-On*);[^traefik-auth]
+- Gerenciamento e auto-renovação de certificados digitais, assinados por *Let's Encrypt*.[^traefik-certs]
 <br clear="left"/>
 
 [^traefik-concepts]: https://doc.traefik.io/traefik/getting-started/concepts
+[^traefik-certs]: https://doc.traefik.io/traefik/user-guides/docker-compose/acme-dns/
+[^traefik-http-redirect]: https://doc.traefik.io/traefik/routing/entrypoints/#redirection
+[^traefik-auth]: https://doc.traefik.io/traefik/middlewares/http/forwardauth/
 
 ## Pi-Hole
 
@@ -145,4 +148,4 @@ Para a criação deste serviço de *VPN* em um cenário como o descrito no pará
 - O nó central na imagem representa o "*hub*" da rede. Este deve ser hospedado em um dispositivo com acesso a um IP público e um *firewall* configurável, de forma a permitir conexões do tipo *inbound* ao dispositivo. Isto é necessário pois este nó será responsável por aceitar conexões externas (para inicação dos túneis de *VPN*) e roteamento dos pacotes entre os nós conectados à rede. É recomendada a utilização de um serviço de *VPS* para a hospedagem deste serviço.
 
 - O nó à direita na imagem representa um dispositivo móvel, localizado fora da rede local, tentando conectar-se ao *home server*. Este também age como um "*spoke*" na topologia, conectado ao *hub* de forma que pacotes destinados à endereços presentes na rede *VPN* são roteados à partir desta. Este pacote é enviado até o *hub* que, por sua vez, roteia este pacote até o *home server* que mantém uma conexão contínua ao *hub*.
-<br clear="left"/>
+<br clear="right"/>
