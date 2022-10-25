@@ -10,30 +10,36 @@ Foram utilizadas as seguintes tecnologias para o desenvolvimento dos *scripts*:
 
 <img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxhub/dashboard-icons/png/ansible.png">
 
-Ansible é uma ferramenta de automação para processos de TI, escrita em *Python*, desenvolvida por *Red Hat*, sendo capaz realizar tarefas como configuração de sistemas e implementação de aplicações.Para isso, utiliza-se de uma conexão *OpenSSH* para comunicação com os dispositivos a serem provisionados.
+Ansible é uma ferramenta de automação para processos de TI, escrita em *Python*, desenvolvida por *Red Hat*, capaz de realizar tarefas como configuração de sistemas e implementação de aplicações. Para isso, utiliza-se de uma conexão *OpenSSH* para comunicação com os dispositivos a serem provisionados.[^ansible-concepts]
 
 Dentro da arquitetura de Ansible, existem dois agentes de rede, são eles:
 
 ### *Control Node* (Nó de Controle)
 
-É o computador responsável por executar as ferramentas de linha de comando de *Ansible*. Neste projeto, este será referido como *Workstation*.
+É o computador responsável por executar as ferramentas de linha de comando de *Ansible*. Neste projeto, este será referido como *Workstation*.[^ansible-concepts]
 
 ### *Managed Node* (Nó Gerenciado)
 
-Estes são os dispositivos-alvo dos *scripts*, ou seja, os nós a serem gerenciados por *Ansible*. Neste projeto, os *managed nodes* serão o servidor local (*home server*) e o servidor virtual privado (*VPS*).
+Estes são os dispositivos-alvo dos *scripts*, ou seja, os nós a serem gerenciados por *Ansible*. Neste projeto, os *managed nodes* serão o servidor local (*home server*) e o servidor virtual privado (*VPS*).[^ansible-concepts]
 <br clear="left"/>
+
+[^ansible-concepts]:https://docs.ansible.com/ansible/latest/network/getting_started/basic_concepts
 
 ## Traefik
 
 <img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxhub/dashboard-icons/png/traefik.png">
 
-*Proxy* reverso. Age como ponto de entrada dos pacotes HTTP/HTTPS dos serviços (portas 80 e 443), adicionando funcionalidades à esses serviços, como:
+*Traefik* é um roteador de borda (*edge router*), também conhecido como *proxy* reverso. Deste modo, age como ponto de entrada dos pacotes HTTP/HTTPS (portas 80 e 443) da rede, roteando-os para o serviço resposável por lidar com a requisição.[^traefik-concepts]
 
-- Suporte à HTTPS para serviços que não o suportam nativamente
-- Suporte à autenticação/*SSO* (*Single Sign-On*)
-- Redirecionamento automático de HTTP para HTTPS
-- Gerenciamento e Auto-renovação de certificados digitais, assinados por *Let's Encrypt*
+Uma das vantagens da utilização de um *proxy* reverso é a adição de funcionalidades ao tratamento de requisições como:
+
+- Redirecionamento automático de HTTP para HTTPS;
+- Suporte à HTTPS para serviços que não o fazem nativamente;
+- Suporte à autenticação/*SSO* (*Single Sign-On*);
+- Gerenciamento e auto-renovação de certificados digitais, assinados por *Let's Encrypt*.
 <br clear="left"/>
+
+[^traefik-concepts]: https://doc.traefik.io/traefik/getting-started/concepts
 
 ## Pi-Hole
 
@@ -71,7 +77,7 @@ Ferramenta voltada para o controle, gerência, integração e automação de cas
 
 ## Homepage
 
-<img align="left" width="100" src="https://raw.githubusercontent.com/benphelps/homepage/main/public/favicon.ico">
+<img align="left" width="100" src="https://raw.githubusercontent.com/benphelps/homepage/main/public/android-chrome-512x512.png">
 
 Este serviço apresenta uma *dashboard* em sua *interface web* com *links* para todos os outros serviços hospedados na rede, servindo como um ponto de entrada para estas aplicações, além de funcionar como um "*hub*" do *home server*.
 <br clear="left"/>
