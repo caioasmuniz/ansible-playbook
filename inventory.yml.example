@@ -1,11 +1,56 @@
 all:
-  hosts:
-    vps:
-      ansible_user: user
-      ansible_host: 192.168.23.200
-      domain_name: example.org
-    home_server:
-      ansible_user: user
-      ansible_host: 192.168.23.200
-      domain_name: example.net
+  vars:
     
+    # name:hashed-password formated string for traefik's basicAuth middleware (used to access traefik's, wireguard-server's and vaultwarden's dashboards). Generate with: 
+    # htpasswd -n user
+    # example format caio:$apr1$uqKQpe59$5wAjFRqzcOpUhUvhHLjp8.
+    auth_credentials:
+
+    # email used in traefik's HTTPS certificate 
+    email: 
+    
+    # token used to verify duckdns' domain ownership through DNS challenge for CA-signed certificate
+    duckdns_token: 
+    
+    # subdomain registered on duckdns to be used
+    duckdns_domain: 
+  hosts:
+    vps:    
+      # user to be used by ansible to login via SSH to this host
+      ansible_user: 
+    
+      # Host IP of the device to be used by ansible to login via SSH
+      ansible_host: 
+    
+      domain_name: "{{ duckdns_domain }}.duckdns.org"
+      docker_dir: /docker/config
+    
+    home_server:
+      # user to be used by ansible to login via SSH to this host
+      ansible_user: 
+    
+      # Host IP of the device to be used by ansible to login via SSH
+      ansible_host: 
+
+      domain_name: "local.{{ duckdns_domain }}.duckdns.org"
+      media_dir: "/home/{{ ansible_user }}/library"
+      docker_dir: "/home/{{ ansible_user }}/.config"
+
+      # other devices/services the user would like to be able to access through either the supplied domain_name (by adding a DNS record for it on Pi-hole) or  server's home dashboard.
+      # in the section are shown values for a suposed router
+      extra_hosts:
+          # Host IP of the device 
+        - host: 
+          
+          # desired domain_name to be used for this host 
+          domain_name: router.{{ domain_name }}
+
+          # name displayed on homepage's dashboard for this host 
+          display_name: "Home Router"
+
+          # description displayed on homepage's dashboard for this host 
+          description: "Router Dashboard"
+
+          # NAME of the icon to be used on homepage on this host available icons present in ttps://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png
+          icon: "openwrt"
+
