@@ -1,5 +1,4 @@
 ---
-
 - name: Create and run Wg-Easy container
   community.docker.docker_container:
     name: "wireguard"
@@ -15,8 +14,8 @@
       - sys_module
     env:
       WG_HOST: "{{ ansible_host }}"
-      WG_ALLOWED_IPS: "10.8.0.0/24, {{ wireguard_extra_allowed_ips }}"
-      WG_DEFAULT_DNS: "{{ wireguard_dns }}"
+      WG_ALLOWED_IPS: "10.8.0.0/24, {{ hostvars.home_server.ansible_facts.default_ipv4.network }}/{{ hostvars.home_server.ansible_facts.default_ipv4.prefix }}"
+      WG_DEFAULT_DNS: "{{ hostvars.home_server.ansible_facts.default_ipv4.address }}"
     ports:
       - "51820:51820/udp"
     volumes:
