@@ -38,21 +38,27 @@
   name: Install Home Server's containers
   strategy: free
   roles:
+    - role: homepage
+      tags:
+        - homepage
+    - role: wireguard-client
+      tags:
+        - wireguard-client
     - role: nextcloud
       tags:
         - nextcloud
-    - role: scrutiny
-      tags:
-        - scrutiny
     - role: homeassistant
       tags:
         - homeassistant
-    - role: transmission
-      tags:
-        - transmission
     - role: jellyfin
       tags:
         - jellyfin
+    - role: vaultwarden
+      tags:
+        - vaultwarden
+    - role: transmission
+      tags:
+        - transmission
     - role: jellyseerr
       tags:
         - jellyseerr
@@ -71,18 +77,12 @@
     - role: bazarr
       tags:
         - bazarr
-    - role: wireguard-client
-      tags:
-        - wireguard-client
     - role: grafana
       tags:
         - grafana
     - role: prometheus
       tags:
         - prometheus
-    - role: homepage
+    - role: scrutiny
       tags:
-        - homepage
-    - role: vaultwarden
-      tags:
-        - vaultwarden
+        - scrutiny
