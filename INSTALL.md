@@ -51,18 +51,18 @@ Este é o dispositivo responsável por executar os *scripts Ansible*. Portanto, 
 
 É recomendada a utilização de um sistema operacional do tipo *Linux* para o *workstation* (instalada diretamente em *hardware* ou através de virtualização). Serão apresentadas instruções para instalação em distribuições ***Ubuntu*** e ***Archlinux***.
 
-#### Instalando Ansible
+#### Instalando pacotes necessários
 
 ##### Ubuntu
 
     sudo apt update
     sudo apt install software-properties-common
     sudo add-apt-repository --yes --update ppa:ansible/ansible
-    sudo apt install ansible
+    sudo apt install ansible git ssh
 
 ##### Archlinux
 
-    sudo pacman -S ansible
+    sudo pacman -S ansible git openssh
 
 #### *Setup* de chaves *SSH*
 
@@ -77,3 +77,45 @@ Este comando criará dois arquivos na pasta `~/.ssh`, chamados `id_ed25519` (cha
 Como uma forma de simplificar a configuração das chaves *SSH*, pode-se fazer o *upload* da chave pública (`id_ed25519.pub`) para a plataforma *GitHub*. Isso se fará útil pois esta chave [pode ser importada com facilidade durante a instalação do sistema operacional do *home_server*](link-para-parte-do-tutorial).
 
 O *upload* da chave pública pode ser realizado através do *link*: [GitHub Keys](https://github.com/settings/keys)
+
+#### *Download* do repositório com os *scripts*
+
+Em um terminal, clonar o repositório utilizando:
+
+    git clone https://github.com/caioasmuniz/ansible-playbook.git
+    cd ansible-playbook
+
+Criar um arquivo `inventory.yml` a partir do modelo `inventory.yml.example` utilizando:
+
+    cp inventory.yml.example inventory.yml
+
+Editar o arquivo `inventory.yml`, alterando os campos indicados de acordo com o ambiente de execução, seguindo as instruções presentes nos comentários de cada campo.
+
+``` yaml
+# inventory.yml.example
+all:
+  vars:
+    auth_credentials: # name:hashed-password formated string for traefik's basicAuth middleware (used to access traefik's, wireguard-server's and vaultwarden's dashboards). Generate with: htpasswd -n user
+    # example format caio:$apr1$uqKQpe59$5wAjFRqzcOpUhUvhHLjp8.
+    email: # email used in traefik's HTTPS certificate 
+    duckdns_token: # token used to verify duckdns' domain ownership through DNS challenge for CA-signed certificate
+    duckdns_domain: # subdomain registered on duckdns to be used
+  hosts:
+    vps:
+      ansible_user: # user to be used by ansible to login via SSH to this host
+      ansible_host: # Host IP of the device to be used by ansible to login via SSH
+      domain_name: "{{ duckdns_domain }}.duckdns.org" # the desired domain name used for accessing the services in this host, it defaults to using the supplied duckdns_domain
+      docker_dir: /docker/config # path to directory to store the deployed services settings 
+    home_server:
+      ansible_user: # user to be used by ansible to login via SSH to this host
+      ansible_host: # Host IP of the device to be used by ansible to login via SSH
+      domain_name: "local.{{ duckdns_domain }}.duckdns.org" # the desired domain name used for accessing the services in this host, it defaults to using the supplied duckdns_domain
+      media_dir: "/home/{{ ansible_user }}/library" # path to directory to store media files for the media server related services (bazarr, lidarr, sonarr, radarr, transmission and jellyfin)
+      docker_dir: "/home/{{ ansible_user }}/.config" # path to directory to store the deployed services settings
+      extra_hosts: # other devices/services the user would like to be able to access through either the supplied domain_name (by adding a DNS record for it on Pi-hole) or  server's home dashboard.
+        - host: # Host IP of the device 
+          domain_name: router.{{ domain_name }} # desired domain_name to be used for this host 
+          display_name: "OpenWRT Main" # name displayed on homepage's dashboard for this host 
+          description: "LuCI Dashboard for Primary Router" #description displayed on homepage's dashboard for this host 
+          icon: "openwrt" # NAME of the icon to be used on homepage on this host available icons present in ttps://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png
+```
