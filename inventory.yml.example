@@ -11,13 +11,14 @@ all:
       ansible_host: # Host IP of the device to be used by ansible to login via SSH
       domain_name: "{{ duckdns_domain }}.duckdns.org" # the desired domain name used for accessing the services in this host, it defaults to using the supplied duckdns_domain
       docker_dir: /docker/config # path to directory to store the deployed services settings 
+      extra_hosts: [] # other devices/services the user would like to be able to access through either the supplied domain_name or  server's home dashboard. Leave as empty array if not necessary
     home_server:
       ansible_user: # user to be used by ansible to login via SSH to this host
       ansible_host: # Host IP of the device to be used by ansible to login via SSH
       domain_name: "local.{{ duckdns_domain }}.duckdns.org" # the desired domain name used for accessing the services in this host, it defaults to using the supplied duckdns_domain
       media_dir: "/home/{{ ansible_user }}/library" # path to directory to store media files for the media server related services (bazarr, lidarr, sonarr, radarr, transmission and jellyfin)
       docker_dir: "/home/{{ ansible_user }}/.config" # path to directory to store the deployed services settings
-      extra_hosts: # other devices/services the user would like to be able to access through either the supplied domain_name (by adding a DNS record for it on Pi-hole) or  server's home dashboard.
+      extra_hosts: # other devices/services the user would like to be able to access through either the supplied domain_name or  server's home dashboard. Leave as empty array if not necessary
         - host: # Host IP of the device 
           domain_name: router.{{ domain_name }} # desired domain_name to be used for this host 
           display_name: "OpenWRT Main" # name displayed on homepage's dashboard for this host 

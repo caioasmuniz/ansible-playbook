@@ -15,6 +15,13 @@
     group: 101
     mode: 0600
 
+- name: Copy the providers.yml file
+  ansible.builtin.template:
+    src: providers.yml.j2
+    dest: "{{ docker_dir }}/traefik/providers.yml"
+    group: 101
+    mode: 0775
+
 - name: Copy the traefik.yml file
   ansible.builtin.template:
     src: traefik.yml.j2
@@ -42,6 +49,7 @@
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "{{ docker_dir }}/traefik/traefik.yml:/traefik.yml:ro"
+      - "{{ docker_dir }}/traefik/providers.yml:/providers.yml:ro"
       - "{{ docker_dir }}/traefik/acme.json:/acme.json"
     networks:
       - name: docker

@@ -1,0 +1,19 @@
+http:
+  # Add the router
+  routers:
+{% for host in extra_hosts %}
+     {{ host.display_name }}:
+      entryPoints:
+      - https
+      service: {{ host.display_name }}
+      rule: Host(`{{ host.domain_name }}`)
+      tls: true
+{% endfor %}
+  # Add the service
+  services:
+{% for host in extra_hosts %}
+    {{ host.display_name }}:
+      loadBalancer:
+        servers:
+        - url: https://{{ host.host }}/
+{% endfor %}
