@@ -1,7 +1,7 @@
 ---
 - name: Create and run Jellyfin container
   community.docker.docker_container:
-    image: "lscr.io/linuxserver/jellyfin"
+    image: "linuxserver/jellyfin:latest"
     name: "jellyfin"
     pull: true
     env:
@@ -12,7 +12,8 @@
     volumes:
       - "{{ docker_dir }}/jellyfin:/config"
       - "{{ media_dir }}/media:/data/media"
-    network_mode: "host"
+    networks:
+      - name: docker
     labels:
       traefik.http.routers.jellyfin.rule: Host(`jellyfin.{{ domain_name }}`)
       traefik.http.routers.jellyfin.entryPoints: https

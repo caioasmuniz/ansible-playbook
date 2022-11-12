@@ -41,7 +41,8 @@
       "TZ": "America/Sao_Paulo"
     volumes:
       - "{{ docker_dir }}/home-assistant:/config"
-    network_mode: "host"
+    networks:
+      - name: docker
     labels:
       traefik.http.routers.homeassistant.rule: Host(`homeassistant.{{ domain_name }}`)
       traefik.http.routers.homeassistant.entrypoints: https
