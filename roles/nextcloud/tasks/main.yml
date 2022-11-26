@@ -12,6 +12,8 @@
       - "{{ docker_dir }}/mariadb:/config"
     ports:
       - "3306:3306/tcp"
+    labels:
+      traefik.enable: "false"
     restart_policy: unless-stopped
 
 - name: Create and run Nextcloud container
