@@ -74,6 +74,7 @@
       homepage.group: "Networks Tools"
       homepage.href: "http://traefik.{{ domain_name }}"
       homepage.description: "Reverse Proxy"
+      homepage.ping: http://traefik/
       homepage.icon: "traefik.png"
       # homepage.widget.type: traefik
       # homepage.widget.url: "http://traefik"

@@ -54,6 +54,7 @@
       homepage.href: "http://homeassistant.{{ domain_name }}"
       homepage.description: "Smart Home Control Hub"
       homepage.icon: "home-assistant.png"
+      homepage.ping: http://homeassistant:8123/
     restart_policy: unless-stopped
 
 - name: Add CNAME entry for homeassistant

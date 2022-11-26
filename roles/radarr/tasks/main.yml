@@ -25,6 +25,7 @@
       homepage.href: "http://radarr.{{ domain_name }}"
       homepage.description: "Requester for Movies"
       homepage.icon: "radarr.png"
+      homepage.ping: http://radarr:7878
       # homepage.widget.type: radarr
       # homepage.widget.url: "http://radarr:7878"
       # homepage.widget.key: ""

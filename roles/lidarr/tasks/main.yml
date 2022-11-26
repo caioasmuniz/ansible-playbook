@@ -25,6 +25,7 @@
       homepage.href: "http://lidarr.{{ domain_name }}"
       homepage.description: "Requester for Music"
       homepage.icon: "lidarr.png"
+      homepage.ping: http://lidarr:8686
       # homepage.widget.type: lidarr
       # homepage.widget.url: "http://lidarr:8686"
       # homepage.widget.key: ""

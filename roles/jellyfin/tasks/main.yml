@@ -25,6 +25,7 @@
       homepage.href: "http://jellyfin.{{ domain_name }}"
       homepage.description: "Unified media server"
       homepage.icon: "jellyfin.png"
+      homepage.ping: http://jellyfin:8096/
       # homepage.widget.type: jellyfin
       # homepage.widget.url: "http://host.docker.internal:8096"
       # homepage.widget.key: ""

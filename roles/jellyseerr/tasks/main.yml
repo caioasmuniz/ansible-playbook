@@ -24,6 +24,8 @@
       homepage.href: "http://jellyseerr.{{ domain_name }}"
       homepage.description: "Interface for Media Requests"
       homepage.icon: "jellyseerr.png"
+      homepage.ping: http://jellyseerr:5055
+
       # homepage.widget.type: jellyseerr
       # homepage.widget.url: "http://jellyseerr:5055"
       # homepage.widget.key: ""

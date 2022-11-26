@@ -76,6 +76,7 @@
       homepage.icon: "pihole.png"
       homepage.widget.type: pihole
       homepage.widget.url: "http://pihole"
+      homepage.ping: http://pihole/admin
 
     restart_policy: unless-stopped
 

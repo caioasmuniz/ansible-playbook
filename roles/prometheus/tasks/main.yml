@@ -36,6 +36,7 @@
       homepage.group: "Monitoring Tools"
       homepage.href: "http://prometheus.{{ domain_name }}"
       homepage.description: "Metrics-based Monitoring Tool"
+      homepage.ping: "http://prometheus:9090"
       homepage.icon: "prometheus.png"
     restart_policy: unless-stopped
 

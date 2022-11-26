@@ -24,6 +24,7 @@
       homepage.href: "http://prowlarr.{{ domain_name }}"
       homepage.description: "Indexer Manager for *arr apps"
       homepage.icon: "prowlarr.png"
+      homepage.ping: http://prowlarr:9696/
       # homepage.widget.type: prowlarr
       # homepage.widget.url: "http://prowlarr:9696"
       # homepage.widget.key: ""

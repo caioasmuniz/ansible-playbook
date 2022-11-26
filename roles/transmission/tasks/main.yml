@@ -33,6 +33,7 @@
       homepage.href: "http://transmission.{{ domain_name }}"
       homepage.description: "BitTorrent Client"
       homepage.icon: "transmission.png"
+      homepage.ping: http://transmission:9091/transmission
       homepage.widget.type: transmission
       homepage.widget.url: "http://transmission:9091"
     restart_policy: unless-stopped

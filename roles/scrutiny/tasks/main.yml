@@ -26,6 +26,7 @@
       homepage.group: "Monitoring Tools"
       homepage.href: "http://scrutiny.{{ domain_name }}"
       homepage.description: "Disk Health Monitoring"
+      homepage.ping: http://scrutiny:8080
       homepage.icon: "scrutiny.png"
     restart_policy: unless-stopped
 

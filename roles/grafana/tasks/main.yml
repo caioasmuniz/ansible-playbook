@@ -41,6 +41,7 @@
       homepage.group: "Monitoring Tools"
       homepage.href: "http://grafana.{{ domain_name }}"
       homepage.description: "Dashboard-based Observability Tool"
+      homepage.ping: http://grafana:3000
       homepage.icon: "grafana.png"
 
     restart_policy: unless-stopped

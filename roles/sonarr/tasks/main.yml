@@ -25,6 +25,7 @@
       homepage.href: "http://sonarr.{{ domain_name }}"
       homepage.description: "Requester for TV Shows"
       homepage.icon: "sonarr.png"
+      homepage.ping: http://sonarr:8989/
       # homepage.widget.type: sonarr
       # homepage.widget.url: "http://sonarr:8989"
       # homepage.widget.key: ""

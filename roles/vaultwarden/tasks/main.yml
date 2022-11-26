@@ -26,6 +26,7 @@
       homepage.href: "http://vaultwarden.{{ domain_name }}/admin"
       homepage.description: "Bitwarden-based Password Manager"
       homepage.icon: "vaultwarden.png"
+      homepage.ping: http://vaultwarden/
     restart_policy: unless-stopped
 
 - name: Add CNAME entry for vaultwarden

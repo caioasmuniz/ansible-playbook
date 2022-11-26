@@ -43,6 +43,7 @@
       homepage.href: "http://nextcloud.{{ domain_name }}"
       homepage.description: "Personal Cloud Storage"
       homepage.icon: "nextcloud.png"
+      homepage.ping: http://nextcloud
     restart_policy: unless-stopped
 
 - name: Add CNAME entry for nextcloud
