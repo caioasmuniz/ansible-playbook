@@ -3,7 +3,7 @@
   community.docker.docker_container:
     name: "wireguard"
     image: "weejewel/wg-easy"
-    pull: true
+    pull: "{{ pull_images }}"
     networks:
       - name: docker
     sysctls:

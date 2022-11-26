@@ -3,7 +3,7 @@
   community.docker.docker_container:
     image: "lscr.io/linuxserver/lidarr"
     name: "lidarr"
-    pull: true
+    pull: "{{ pull_images }}"
     env:
       "PUID": "1000"
       "PGID": "1000"

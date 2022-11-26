@@ -32,7 +32,7 @@
   community.docker.docker_container:
     image: "lscr.io/linuxserver/homeassistant"
     name: "homeassistant"
-    pull: true
+    pull: "{{ pull_images }}"
     restart: true
     env:
       "PUID": "1000"

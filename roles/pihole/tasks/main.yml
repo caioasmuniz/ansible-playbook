@@ -49,7 +49,7 @@
   community.docker.docker_container:
     image: "pihole/pihole:latest"
     name: "pihole"
-    pull: true
+    pull: "{{ pull_images }}"
     env:
       "PUID": "1000"
       "PGID": "1000"
@@ -76,6 +76,7 @@
       homepage.icon: "pihole.png"
       homepage.widget.type: pihole
       homepage.widget.url: "http://pihole"
+
     restart_policy: unless-stopped
 
 - name: Add CNAME entry for pihole

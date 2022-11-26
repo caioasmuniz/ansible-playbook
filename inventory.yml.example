@@ -5,6 +5,7 @@ all:
     email: # email used in traefik's HTTPS certificate 
     duckdns_token: # token used to verify duckdns' domain ownership through DNS challenge for CA-signed certificate
     duckdns_domain: # subdomain registered on duckdns to be used
+    pull_images: true # whether or not to force pull the Docker images from registry when launching services
   hosts:
     vps:
       ansible_user: # user to be used by ansible to login via SSH to this host

@@ -44,8 +44,7 @@
   community.docker.docker_container:
     image: "ghcr.io/benphelps/homepage:main"
     name: "homepage"
-    pull: true
-    restart: true
+    pull: "{{ pull_images }}"
     env:
       "PUID": "1000"
       "PGID": "1000"

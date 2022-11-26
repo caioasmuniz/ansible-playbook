@@ -20,6 +20,7 @@
   community.docker.docker_container:
     image: "lscr.io/linuxserver/nextcloud"
     name: "nextcloud"
+    pull: "{{ pull_images }}"
     env:
       "PUID": "1000"
       "PGID": "1000"

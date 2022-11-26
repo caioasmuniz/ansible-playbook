@@ -38,7 +38,7 @@
   community.docker.docker_container:
     image: "traefik:latest"
     name: "traefik"
-    pull: true
+    pull: "{{ pull_images }}"
     restart: true
     env:
       "PUID": "1000"

@@ -18,7 +18,7 @@
   community.docker.docker_container:
     image: "grafana/grafana-oss:latest"
     name: "grafana"
-    pull: true
+    pull: "{{ pull_images }}"
     user: "0:0"
     restart: true
     env:
