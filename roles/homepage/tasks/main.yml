@@ -28,6 +28,12 @@
     group: 101
     mode: 0775
 
+- name: Copy the settings.yaml file
+  ansible.builtin.template:
+    src: settings.yaml.j2
+    dest: "{{ docker_dir }}/homepage/settings.yaml"
+    group: 101
+    mode: 0775
 
 - name: Verify stats for "docker" network
   community.docker.docker_network_info:
@@ -36,7 +42,7 @@
 
 - name: Create and run Homepage container
   community.docker.docker_container:
-    image: "ghcr.io/benphelps/homepage:latest"
+    image: "ghcr.io/benphelps/homepage:main"
     name: "homepage"
     pull: true
     restart: true
