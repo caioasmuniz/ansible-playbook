@@ -1,5 +1,24 @@
 ---
-- name: Create and run Sonarr container
+- name: Run barebones container for apikey extraction
+  community.docker.docker_container:
+    name: "sonarr"
+    image: "lscr.io/linuxserver/sonarr"
+    volumes:
+      - "{{ docker_dir }}/sonarr:/config"
+    restart_policy: unless-stopped
+    comparisons:
+      "*": ignore
+      volumes: allow_more_present
+
+- name: Get ApiKey for sonarr
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: get_apikey_arr_apps.yml
+  vars:
+    service: sonarr
+    config_file: config
+
+- name: Recreate Sonarr container with necessary configs
   community.docker.docker_container:
     image: "lscr.io/linuxserver/sonarr"
     name: "sonarr"
@@ -26,10 +45,9 @@
       homepage.description: "Requester for TV Shows"
       homepage.icon: "sonarr.png"
       homepage.ping: http://sonarr:8989/
-      # homepage.widget.type: sonarr
-      # homepage.widget.url: "http://sonarr:8989"
-      # homepage.widget.key: ""
-
+      homepage.widget.type: sonarr
+      homepage.widget.url: "http://sonarr:8989"
+      homepage.widget.key: "{{ apikey }}"
     restart_policy: unless-stopped
 
 - name: Add CNAME entry for sonarr

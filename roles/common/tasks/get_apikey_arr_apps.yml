@@ -1,0 +1,16 @@
+---
+- name: Get XML config file file for {{ service }}
+  ansible.builtin.slurp:
+    src: "{{ docker_dir }}/{{ service }}/{{ config_file }}.xml"
+  register: config_xml
+
+- name: Parse XML file
+  community.general.xml:
+    xmlstring: "{{ config_xml.content | ansible.builtin.b64decode }}"
+    xpath: /Config/ApiKey
+    content: text
+  register: parsed_config_file
+
+- name: Export apikey as fact
+  ansible.builtin.set_fact:
+    apikey: "{{ parsed_config_file.matches[0].ApiKey }}"

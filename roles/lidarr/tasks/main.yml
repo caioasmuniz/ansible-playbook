@@ -1,5 +1,24 @@
 ---
-- name: Create and run Lidarr container
+- name: Run barebones container for apikey extraction
+  community.docker.docker_container:
+    name: "lidarr"
+    image: "lscr.io/linuxserver/lidarr"
+    volumes:
+      - "{{ docker_dir }}/lidarr:/config"
+    restart_policy: unless-stopped
+    comparisons:
+      "*": ignore
+      volumes: allow_more_present
+
+- name: Get ApiKey for lidarr
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: get_apikey_arr_apps.yml
+  vars:
+    service: lidarr
+    config_file: config
+
+- name: Recreate Lidarr container with necessary configs
   community.docker.docker_container:
     image: "lscr.io/linuxserver/lidarr"
     name: "lidarr"
@@ -26,9 +45,9 @@
       homepage.description: "Requester for Music"
       homepage.icon: "lidarr.png"
       homepage.ping: http://lidarr:8686
-      # homepage.widget.type: lidarr
-      # homepage.widget.url: "http://lidarr:8686"
-      # homepage.widget.key: ""
+      homepage.widget.type: lidarr
+      homepage.widget.url: "http://lidarr:8686"
+      homepage.widget.key: "{{ apikey }}"
     restart_policy: unless-stopped
 
 - name: Add CNAME entry for lidarr

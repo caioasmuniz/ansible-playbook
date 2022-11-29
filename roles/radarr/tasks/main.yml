@@ -1,8 +1,27 @@
 ---
-- name: Create and run Radarr container
+- name: Run barebones container for apikey extraction
   community.docker.docker_container:
-    image: "lscr.io/linuxserver/radarr"
     name: "radarr"
+    image: "lscr.io/linuxserver/radarr"
+    volumes:
+      - "{{ docker_dir }}/radarr:/config"
+    restart_policy: unless-stopped
+    comparisons:
+      "*": ignore
+      volumes: allow_more_present
+
+- name: Get ApiKey for radarr
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: get_apikey_arr_apps.yml
+  vars:
+    service: radarr
+    config_file: config
+
+- name: Recreate Radarr container with necessary configs
+  community.docker.docker_container:
+    name: "radarr"
+    image: "lscr.io/linuxserver/radarr"
     pull: "{{ pull_images }}"
     env:
       "PUID": "1000"
@@ -26,10 +45,9 @@
       homepage.description: "Requester for Movies"
       homepage.icon: "radarr.png"
       homepage.ping: http://radarr:7878
-      # homepage.widget.type: radarr
-      # homepage.widget.url: "http://radarr:7878"
-      # homepage.widget.key: ""
-    restart_policy: unless-stopped
+      homepage.widget.type: radarr
+      homepage.widget.url: "http://radarr:7878"
+      homepage.widget.key: "{{ apikey }}"
 
 - name: Add CNAME entry for radarr
   ansible.builtin.import_role:

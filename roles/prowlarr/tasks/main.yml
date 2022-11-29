@@ -1,5 +1,23 @@
 ---
-- name: Create and run Prowlarr container
+- name: Run barebones container for apikey extraction
+  community.docker.docker_container:
+    name: "prowlarr"
+    image: "lscr.io/linuxserver/prowlarr:develop"
+    volumes:
+      - "{{ docker_dir }}/prowlarr:/config"
+    restart_policy: unless-stopped
+    comparisons:
+      "*": ignore
+      volumes: allow_more_present
+
+- name: Get ApiKey for prowlarr
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: get_apikey_arr_apps.yml
+  vars:
+    service: prowlarr
+
+- name: Recreate Prowlarr container with necessary configs
   community.docker.docker_container:
     image: "lscr.io/linuxserver/prowlarr:develop"
     name: "prowlarr"
@@ -25,9 +43,9 @@
       homepage.description: "Indexer Manager for *arr apps"
       homepage.icon: "prowlarr.png"
       homepage.ping: http://prowlarr:9696/
-      # homepage.widget.type: prowlarr
-      # homepage.widget.url: "http://prowlarr:9696"
-      # homepage.widget.key: ""
+      homepage.widget.type: prowlarr
+      homepage.widget.url: "http://prowlarr:9696"
+      homepage.widget.key: "{{ apikey }}"
     restart_policy: unless-stopped
 
 - name: Add CNAME entry for prowlarr
