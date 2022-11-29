@@ -35,6 +35,13 @@
     group: 101
     mode: 0775
 
+- name: Copy the widgets.yaml file
+  ansible.builtin.template:
+    src: widgets.yaml.j2
+    dest: "{{ docker_dir }}/homepage/widgets.yaml"
+    group: 101
+    mode: 0775
+
 - name: Verify stats for "docker" network
   community.docker.docker_network_info:
     name: docker
@@ -42,7 +49,7 @@
 
 - name: Create and run Homepage container
   community.docker.docker_container:
-    image: "ghcr.io/benphelps/homepage:main"
+    image: "ghcr.io/benphelps/homepage:latest"
     name: "homepage"
     pull: "{{ pull_images }}"
     env:
