@@ -28,6 +28,8 @@
       homepage.description: "Disk Health Monitoring"
       homepage.ping: http://scrutiny:8080
       homepage.icon: "scrutiny.png"
+      homepage.widget.type: scrutiny
+      homepage.widget.url: "http://scrutiny:8080"
     restart_policy: unless-stopped
 
 - name: Add CNAME entry for scrutiny
