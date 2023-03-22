@@ -12,10 +12,15 @@
     in
     {
       devShells.x86_64-linux.default = pkgs.mkShell {
-        buildInputs = [ pkgs.ansible ];
-        shellHook = ''
-          ansible-playbook main.yml
-        '';
+        buildInputs = with pkgs;[
+          ansible
+          ansible-lint
+          nixpkgs-fmt
+          nil
+        ];
+        # shellHook = ''
+        #   ansible-playbook main.yml
+        # '';
       };
     };
 }
