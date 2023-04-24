@@ -8,7 +8,7 @@ Foram utilizadas as seguintes tecnologias para o desenvolvimento dos *scripts*:
 
 ## Ansible
 
-<img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxhub/dashboard-icons/png/ansible.png">
+<img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/ansible.png">
 
 Ansible é uma ferramenta de automação para processos de TI, escrita em *Python*, desenvolvida por *Red Hat*, capaz de realizar tarefas como configuração de sistemas e implementação de aplicações. Para isso, utiliza-se de uma conexão *OpenSSH* para comunicação com os dispositivos a serem provisionados.[^ansible-concepts]
 
@@ -23,11 +23,22 @@ Dentro da arquitetura de Ansible, existem dois agentes de rede, são eles:
 Estes são os dispositivos-alvo dos *scripts*, ou seja, os nós a serem gerenciados por *Ansible*. Neste projeto, os *managed nodes* serão o servidor local (*home server*) e o servidor virtual privado (*VPS*).[^ansible-concepts]
 <br clear="left"/>
 
-[^ansible-concepts]:https://docs.ansible.com/ansible/latest/network/getting_started/basic_concepts
+[^ansible-concepts]:https://docs.ansible.com/ansible/latest/network/getting_started/basic_concepts.html
+
+## Docker
+
+<img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/docker.png">
+
+Docker é uma ferramenta de código aberto para desenvolvimento, distribuição e execução de aplicações baseado em *containers*.[^docker-overview]
+
+Sendo a tecnologia responsável pelo ambiente no qual as aplicações provisionadas pelo projeto serão executadas, que têm imagens *docker* disponibilizadas online.
+<br clear="left"/>
+
+[^docker-overview]: https://docs.docker.com/get-started/overview/
 
 ## Traefik
 
-<img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxhub/dashboard-icons/png/traefik.png">
+<img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/traefik.png">
 
 *Traefik* é um roteador de borda (*edge router*), também conhecido como *proxy* reverso. Deste modo, age como ponto de entrada dos pacotes HTTP/HTTPS (portas 80 e 443) da rede, roteando-os para o serviço resposável por lidar com a requisição.[^traefik-concepts]
 
@@ -46,7 +57,7 @@ Uma das vantagens da utilização de um *proxy* reverso é a adição de funcion
 
 ## Pi-Hole
 
-<img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxhub/dashboard-icons/png/pihole.png">
+<img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/pihole.png">
 
 Servidor *DNS*(*Domain Name System*). Age como um bloqueador de anúncios em toda a rede local, sob o princípio de *DNS sinkhole*, ou seja, envia endereços não-roteáveis para um conjunto específico de domínios, neste caso, provedores de anúncios como, por exemplo, o *Google Ads*. [^pihole-overview]  
 
@@ -57,7 +68,7 @@ Servidor *DNS*(*Domain Name System*). Age como um bloqueador de anúncios em tod
 
 ## Nextcloud
 
-<img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxhub/dashboard-icons/png/nextcloud.png">
+<img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/nextcloud.png">
 
 Serviço que opera como uma nuvem privada, sendo um substituto auto-hospedado à serviços como *Google Drive*, *Dropbox* e *iCloud*. Algumas das funções presentes na aplicação são:
 
@@ -74,15 +85,23 @@ Serviço que opera como uma nuvem privada, sendo um substituto auto-hospedado à
 
 ## Home Assistant
 
-<img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxhub/dashboard-icons/png/home-assistant.png">
+<img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/home-assistant.png">
 
-Ferramenta voltada para o controle, gerência, integração e automação de casas inteligentes. Seu objetivo é proporcionar uma *interface* para interação com dispositivos *IoT* de forma local, centralizada e privada. Atualmente, a aplicação conta com cerca de 2000 integrações, que adicionam o suporte a diversos serviços/dispositivos através de *Home Assistant*. Exemplos de integrações são:
+Ferramenta voltada para o controle, gerência, integração e automação de casas inteligentes. Seu objetivo é proporcionar uma *interface* para interação com dispositivos *IoT* de forma local, centralizada e privada[^home-assistant-overview]. Atualmente, a aplicação conta com cerca de 2000 integrações[^home-assistant-integrations], que adicionam o suporte a diversos serviços/dispositivos através de *Home Assistant*. Exemplos de integrações são:
 
-- Controle de lâmpadas inteligentes através da *interface* do serviço;
-- Controle de reprodução de mídia em dispositivos como TVs através do protocolo DLNA;
+- Controle de lâmpadas inteligentes através da *interface* do serviço[^home-assistant-yeelight] [^home-assistant-philips-hue];
+- Controle e reprodução de mídia em dispositivos como TVs através do protocolo DLNA[^home-assistant-dlna] [^home-assistant-dlna-2];
 - Monitoramento e registro de dados de sensores;
-- Criação de automações baseadas em eventos capturados através das integrações.
+- Criação de automações baseadas em eventos capturados através das integrações[^home-assistant-automation].
 <br clear="left"/>
+
+[^home-assistant-overview]: https://www.home-assistant.io
+[^home-assistant-integrations]: https://www.home-assistant.io/integrations/
+[^home-assistant-yeelight]: https://www.home-assistant.io/integrations/yeelight/
+[^home-assistant-philips-hue]: https://www.home-assistant.io/integrations/hue/
+[^home-assistant-dlna]: https://www.home-assistant.io/integrations/dlna_dms/
+[^home-assistant-dlna-2]: https://www.home-assistant.io/integrations/dlna_dmr/
+[^home-assistant-automation]: https://www.home-assistant.io/docs/automation/
 
 ## Homepage
 
@@ -97,16 +116,16 @@ Um conjunto de serviços integrados com a função de **requisição**, **obten�
 
 ### Jellyseerr
 
-<img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxhub/dashboard-icons/png/jellyseerr.png">
+<img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/jellyseerr.png">
 
 Serviço responsável pela **requisição** dos arquivos de mídia. Através de sua interface, os usuários podem requerir por programas de TV ou filmes à serem obtidos por outros serviços da cadeia.
 <br clear="left"/>
 
 ### Radarr, Sonarr, Lidarr
 
-<img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxhub/dashboard-icons/png/radarr.png">
-<img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxhub/dashboard-icons/png/sonarr.png">
-<img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxhub/dashboard-icons/png/lidarr.png">
+<img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/radarr.png">
+<img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/sonarr.png">
+<img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/lidarr.png">
 
 Os três serviços têm a função de **requisição** e **indexação** dos arquivos de mídia. Isso se baseia na busca em indexadores pelos arquivos requisitados (tanto através da *interface web* da aplicação, quanto de outros serviços, como o **jellyseerr**), de acordo com metados relevantes a aquele tipo de mídia. Cada um dos três aplicativos é focado em um tipo de mídia, sendo estes:
 
@@ -117,28 +136,28 @@ Os três serviços têm a função de **requisição** e **indexação** dos arq
 
 ### Prowlarr
 
-<img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxhub/dashboard-icons/png/prowlarr.png">
+<img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/prowlarr.png">
 
 Este é o serviço responsável por gerenciar os indexadores utilizados na busca de arquivos nos aplicativos Radarr, Sonarr e Lidarr; proporcionando uma forma centralizada para gerência destes indexadores através de sua **interface web**.
 <br clear="left"/>
 
 ### Transmission
 
-<img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxhub/dashboard-icons/png/transmission.png">
+<img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/transmission.png">
 
 Cliente *BitTorrent*. Na cadeia de gerenciamento de mídia, é o responsável pela **obtenção** dos arquivos encontrados através dos serviços Radarr, Sonarr e  Lidarr.
 <br clear="left"/>
 
 ### Jellyfin
 
-<img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxhub/dashboard-icons/png/jellyfin.png">
+<img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/jellyfin.png">
 
 Serviço reponsável pela **reprodução** dos títulos já obtidos nas etapas anteriores da cadeia de gerência de mídia. Através de sua *interface web*, os usuários podem pesquisar e reproduzir os títulos de suas bibiliotecas.
 <br clear="left"/>
 
 ## Acesso Remoto
 
-<img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxhub/dashboard-icons/png/wireguard.png">
+<img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/wireguard.png">
 
 Como forma de proporcionar uma forma de acesso remoto aos serviços provisionados, permitindo a utilização destes de fora da rede local, é provisonada uma infraestrutura que utiliza o protocolo de tunelamento *Wireguard* para a criação de um *VPN* (*Virtual Private Network*) entre estes dispositivos remotos e a rede local do *home server* através de um "*hub*", hospedado em um serviço de nuvem.
 
