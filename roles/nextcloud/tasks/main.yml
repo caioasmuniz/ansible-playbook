@@ -2,7 +2,7 @@
 - name: Create and run MariaDB container
   community.docker.docker_container:
     name: "mariadb"
-    image: "lscr.io/linuxserver/mariadb"
+    image: "lscr.io/linuxserver/mariadb:10.6.13-r0-ls97"
     pull: true
     env:
       "PUID": "1000"
@@ -43,7 +43,7 @@
       homepage.href: "http://nextcloud.{{ domain_name }}"
       homepage.description: "Personal Cloud Storage"
       homepage.icon: "nextcloud.png"
-      homepage.ping: http://nextcloud
+      homepage.ping: https://nextcloud/
     restart_policy: unless-stopped
 
 - name: Add CNAME entry for nextcloud

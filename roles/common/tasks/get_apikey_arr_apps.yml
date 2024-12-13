@@ -1,5 +1,10 @@
 ---
-- name: Get XML config file file for {{ service }}
+- name: Install python-lxml
+  ansible.builtin.apt:
+    name: python3-lxml
+    state: present
+
+- name: Get XML config file for {{ service }}
   ansible.builtin.slurp:
     src: "{{ docker_dir }}/{{ service }}/{{ config_file }}.xml"
   register: config_xml
