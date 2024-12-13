@@ -1,30 +1,14 @@
 ---
 - hosts: vps, home_server
-  name: Updating packages and installing docker
+  name: Update packages and install docker
   strategy: linear
   roles:
     - role: common
-      tags:
-        - common
+      tags: common
+    - role: geerlingguy.docker
+      tags: docker
     - role: docker
-      tags:
-        - docker
-
-- hosts: home_server
-  name: Install Pihole in Home Server
-  strategy: linear
-  roles:
-    - role: pihole
-      tags:
-        - pihole
-
-- hosts: vps, home_server
-  name: Install Traefik in vps and Home server
-  strategy: free
-  roles:
-    - role: traefik
-      tags:
-        - traefik
+      tags: docker
 
 - hosts: vps
   name: Install VPS's containers

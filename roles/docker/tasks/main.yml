@@ -9,47 +9,6 @@
     repo_arch: arm64
   when: (ansible_architecture == "arm64") or (ansible_architecture == "aarch64")
 
-- name: Include OS-specific variables
-  ansible.builtin.include_vars: "{{ ansible_facts['distribution'] }}.yml"
-
-- name: Install required system packages
-  ansible.builtin.package:
-    state: present
-    name: "{{ docker_deps }}"
-
-- name: Install Docker (Ubuntu)
-  when: ansible_facts['distribution'] == 'Ubuntu'
-  block:
-    - name: Add Docker GPG apt Key
-      ansible.builtin.apt_key:
-        url: https://download.docker.com/linux/ubuntu/gpg
-        state: present
-
-    - name: Add Docker Repository
-      ansible.builtin.apt_repository:
-        repo: "deb [arch={{ repo_arch }}] https://download.docker.com/linux/{{ ansible_facts['distribution'] | lower }} {{ ansible_lsb['codename'] }} stable"
-        state: present
-
-- name: Update apt and install docker
-  block:
-    - name: Attempt installation
-      ansible.builtin.package:
-        update_cache: true
-        name: "{{ docker_packages }}"
-        state: present
-  rescue:
-    - name: Fix the dumb Ubuntu Jammy error
-      ansible.builtin.replace:
-        path: /etc/systemd/system/multi-user.target.wants/docker.service
-        regexp: "fd://"
-        replace: "unix://"
-      when: ansible_distribution == 'Ubuntu' and ansible_distribution_version is version('22.04', '>=')
-
-- name: Ensure group docker exists
-  ansible.builtin.group:
-    name: docker
-    state: present
-
 - name: Add user to the docker group
   ansible.builtin.user:
     name: "{{ ansible_user }}"
@@ -57,16 +16,18 @@
       - docker
     append: true
 
-- name: Install Docker Module for Python
-  ansible.builtin.pip:
-    name: docker
+# - name: Ensure /etc/docker/ directory exists.
+#   ansible.builtin.file:
+#     path: /etc/docker
+#     state: directory
+#     mode: 0755
 
-- name: Make sure Docker is running and enabled
-  ansible.builtin.systemd:
-    name: docker
-    daemon_reload: true
-    state: started
-    enabled: true
+# - name: Configure Docker daemon options.
+#   ansible.builtin.copy:
+#     content: '{"hosts": ["tcp://0.0.0.0:2375", "unix:///var/run/docker.sock"]}'
+#     dest: /etc/docker/daemon.json
+#     mode: 0644
+#   notify: Restart docker
 
 - name: Chmod the data folder
   become: true
