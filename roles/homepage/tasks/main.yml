@@ -49,14 +49,12 @@
 
 - name: Create and run Homepage container
   community.docker.docker_container:
-    image: "ghcr.io/benphelps/homepage:latest"
+    image: "ghcr.io/gethomepage/homepage:latest"
     name: "homepage"
     pull: "{{ pull_images }}"
     env:
-      "PUID": "1000"
-      "PGID": "1000"
-      "UMASK": "002"
-      "TZ": "America/Sao_Paulo"
+      "HOMEPAGE_ALLOWED_HOSTS": "{{ domain_name }}"
+    restart: true
     volumes:
       - "{{ docker_dir }}/homepage:/app/config"
       - "/var/run/docker.sock:/var/run/docker.sock"
