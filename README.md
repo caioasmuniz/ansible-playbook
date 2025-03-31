@@ -57,7 +57,7 @@ Uma das vantagens da utilização de um *proxy* reverso é a adição de funcion
 
 ## Pi-Hole
 
-<img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/pihole.png">
+<img align="left" width="100" src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/pi-hole.png">
 
 Servidor *DNS*(*Domain Name System*). Age como um bloqueador de anúncios em toda a rede local, sob o princípio de *DNS sinkhole*, ou seja, envia endereços não-roteáveis para um conjunto específico de domínios, neste caso, provedores de anúncios como, por exemplo, o *Google Ads*. [^pihole-overview]  
 
