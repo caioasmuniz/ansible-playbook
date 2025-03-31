@@ -1,0 +1,97 @@
+---
+- name: Create and run Postgres container
+  community.docker.docker_container:
+    name: "database"
+    image: "docker.io/tensorchord/pgvecto-rs:pg14-v0.2.0@sha256:90724186f0a3517cf6914295b5ab410db9ce23190a2d9d0b9dd6463e3fa298f0"
+    pull: true
+    env:
+      "PUID": "1000"
+      "PGID": "1000"
+      "TZ": "America/Sao_Paulo"
+      "POSTGRES_PASSWORD": "postgres"
+      "POSTGRES_USER": "postgres"
+      "POSTGRES_DB": "immich"
+      "POSTGRES_INITDB_ARGS": "--data-checksums"
+    volumes:
+      - "{{ docker_dir }}/postgres:/var/lib/data"
+    networks:
+      - name: docker
+    command: >-
+      postgres
+      -c shared_preload_libraries=vectors.so
+      -c 'search_path="$$user", public, vectors'
+      -c logging_collector=on
+      -c max_wal_size=2GB
+      -c shared_buffers=512MB
+      -c wal_compression=on
+    restart_policy: always
+
+- name: Create and run Redis container
+  community.docker.docker_container:
+    image: "docker.io/redis:6.2-alpine@sha256:eaba718fecd1196d88533de7ba49bf903ad33664a92debb24660a922ecd9cac8"
+    name: "redis"
+    restart_policy: always
+    networks:
+      - name: docker
+
+- name: Create and run Machine-Learning container
+  community.docker.docker_container:
+    image: "ghcr.io/immich-app/immich-machine-learning:release-cuda"
+    name: "immich-machine-learning"
+    restart_policy: always
+    volumes:
+      - "{{ docker_dir }}/immich/machine-learning:/cache"
+    networks:
+      - name: docker
+    ports:
+      - '3003:3003'
+    device_requests:
+      - driver: "nvidia"
+        count: "-1"
+        capabilities:
+          - "gpu"
+
+- name: Create and run Immich container
+  community.docker.docker_container:
+    image: "ghcr.io/immich-app/immich-server:release"
+    name: "immich"
+    pull: "{{ pull_images }}"
+    env:
+      "PUID": "1000"
+      "PGID": "1000"
+      "UMASK": "002"
+      "TZ": "America/Sao_Paulo"
+      "POSTGRES_PASSWORD": "postgres"
+      "POSTGRES_USER": "postgres"
+      "POSTGRES_DB": "immich"
+      "POSTGRES_INITDB_ARGS": "--data-checksums"
+      "UPLOAD_LOCATION": "{{ media_dir }}/photos"
+      "DB_DATA_LOCATION": "{{ docker_dir }}/postgres"
+      "IMMICH_VERSION": "release"
+    volumes:
+      - "{{ media_dir }}/photos:/usr/src/app/upload"
+      - "{{ media_dir }}/mediahd/MIDIAS:/mediahd/MIDIAS:ro"
+      - "{{ media_dir }}/mediahd/MIDIAS-2:/mediahd/MIDIAS-2:ro"
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - name: docker
+    labels:
+      traefik.http.routers.immich.entrypoints: https
+      traefik.http.routers.immich.rule: Host(`immich.{{ domain_name }}`)
+      traefik.http.routers.immich.tls: "true"
+      traefik.http.services.immich.loadbalancer.server.port: "2283"
+
+      homepage.name: "Immich"
+      homepage.group: "Main Apps"
+      homepage.href: "https://immich.{{ domain_name }}"
+      homepage.description: "Photo Backup Service"
+      homepage.icon: "immich.png"
+      homepage.ping: https://immich/
+    restart_policy: unless-stopped
+
+- name: Add CNAME entry for immich
+  ansible.builtin.import_role:
+    name: pihole
+    tasks_from: add_cname_record.yml
+  vars:
+    subdomain: immich

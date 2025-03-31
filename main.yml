@@ -26,8 +26,8 @@
   strategy: free
   roles:
     - role: homepage
-      tags:
-        - homepage
+    - role: immich
+      tags: immich
     - role: wireguard-client
       tags: wireguard-client
     - role: tailscale
