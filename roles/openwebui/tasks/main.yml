@@ -1,0 +1,33 @@
+---
+- name: Create and run Open Web UI container
+  community.docker.docker_container:
+    name: "openwebui"
+    image: "ghcr.io/open-webui/open-webui:main"
+    pull: "{{ pull_images }}"
+    env:
+      TZ: "America/Sao_Paulo"
+      OLLAMA_BASE_URL: "http://192.168.0.172:11434"
+    networks:
+      - name: docker
+    volumes:
+      - "{{ docker_dir }}/openwebui:/app/backend/data"
+    restart_policy: unless-stopped
+    labels:
+      traefik.http.routers.openwebui.rule: Host(`ai.{{ domain_name }}`)
+      traefik.http.routers.openwebui.entrypoints: https
+      traefik.http.routers.openwebui.tls: "true"
+      traefik.http.services.openwebui.loadbalancer.server.port: "8080"
+
+      homepage.name: "Open Web UI"
+      homepage.group: "Main Apps"
+      homepage.href: "http://ai.{{ domain_name }}"
+      homepage.description: "System resources monitor"
+      homepage.icon: "open-webui.png"
+      homepage.ping: http://openwebui:8080
+
+- name: Add CNAME entry for glances
+  ansible.builtin.import_role:
+    name: pihole
+    tasks_from: add_cname_record.yml
+  vars:
+    subdomain: ai

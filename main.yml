@@ -74,3 +74,5 @@
     - role: scrutiny
       tags:
         - scrutiny
+    - role: openwebui
+      tags: openwebui
