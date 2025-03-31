@@ -14,9 +14,12 @@
   name: Install VPS's containers
   strategy: linear
   roles:
+    - role: traefik
+      tags: traefik
     - role: wireguard-server
-      tags:
-        - wireguard-server
+      tags: wireguard-server
+    - role: headscale
+      tags: headscale
 
 - hosts: home_server
   name: Install Home Server's containers
@@ -26,8 +29,9 @@
       tags:
         - homepage
     - role: wireguard-client
-      tags:
-        - wireguard-client
+      tags: wireguard-client
+    - role: tailscale
+      tags: tailscale
     - role: nextcloud
       tags:
         - nextcloud

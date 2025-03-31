@@ -1,0 +1,97 @@
+- name: Create the config folder
+  ansible.builtin.file:
+    path: "{{ docker_dir }}/headscale"
+    owner: "{{ ansible_user }}"
+    state: directory
+    group: 101
+    mode: 0775
+
+- name: Copy the config.yaml file
+  ansible.builtin.template:
+    src: config.yaml.j2
+    dest: "{{ docker_dir }}/headscale/config.yaml"
+    group: 101
+    mode: 0775
+
+- name: Create the config folder
+  ansible.builtin.file:
+    path: "{{ docker_dir }}/headplane"
+    owner: "{{ ansible_user }}"
+    state: directory
+    group: 101
+    mode: 0775
+
+- name: Copy the config.yaml file
+  ansible.builtin.template:
+    src: headplane-config.yaml.j2
+    dest: "{{ docker_dir }}/headplane/config.yaml"
+    group: 101
+    mode: 0775
+
+- name: Create and run Headscale container
+  community.docker.docker_container:
+    image: "headscale/headscale"
+    name: "headscale"
+    pull: "{{ pull_images }}"
+    restart: true
+    env:
+      "PUID": "1000"
+      "PGID": "1000"
+      "UMASK": "002"
+      "TZ": "America/Sao_Paulo"
+    volumes:
+      - "{{ docker_dir }}/headscale:/etc/headscale"
+      - "{{ docker_dir }}/headscale/data:/var/lib/headscale"
+    networks:
+      - name: docker
+    command: "serve"
+    labels:
+      traefik.http.services.headscale.loadbalancer.server.port: "8080"
+      traefik.http.services.headscale.loadbalancer.server.scheme: http
+      traefik.http.routers.headscale.rule: Host(`headscale.{{ domain_name }}`)
+      traefik.http.routers.headscale.entrypoints: https
+      traefik.http.routers.headscale.tls: "true"
+      traefik.http.routers.headscale.service: headscale
+      traefik.udp.services.headscale-udp-41641.loadbalancer.server.port: "41641"
+      traefik.udp.services.headscale-udp-3478.loadbalancer.server.port: "3478"
+
+- name: Create and run Headplane container
+  community.docker.docker_container:
+    image: "ghcr.io/tale/headplane"
+    name: "headplane"
+    pull: "{{ pull_images }}"
+    restart: true
+    env:
+      "PUID": "1000"
+      "PGID": "1000"
+      "UMASK": "002"
+      "TZ": "America/Sao_Paulo"
+
+      "HEADSCALE_INTEGRATION": 'docker'
+      "HEADSCALE_CONTAINER": 'headscale'
+      "DISABLE_API_KEY_LOGIN": 'true'
+      "HEADSCALE_URL": 'https://headscale.caioasmuniz.duckdns.org'
+      "HOST": '0.0.0.0'
+      "PORT": '3000'
+      "ROOT_API_KEY": 'x1498gd6z956pnrs4frir89imqhpqj3k'
+    volumes:
+      - "{{ docker_dir }}/headplane/:/etc/headplane"
+      - "{{ docker_dir }}/headscale:/etc/headscale"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    networks:
+      - name: docker
+    labels:
+      traefik.http.routers.headplane.rule: Host(`headscale.{{ domain_name }}`) && PathPrefix(`/admin`)
+      traefik.http.routers.headplane.entrypoints: https
+      traefik.http.routers.headplane.tls: "true"
+      traefik.http.services.headplane.loadbalancer.server.port: "3000"
+      traefik.http.routers.headplane.middlewares: auth
+
+    restart_policy: unless-stopped
+
+- name: Add CNAME entry for headscale
+  ansible.builtin.import_role:
+    name: pihole
+    tasks_from: add_cname_record.yml
+  vars:
+    subdomain: headscale

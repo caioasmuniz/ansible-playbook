@@ -1,0 +1,28 @@
+- name: Create and run Tailscale client container
+  community.docker.docker_container:
+    image: "tailscale/tailscale:latest"
+    name: "tailscale"
+    pull: "{{ pull_images }}"
+    restart: true
+    env:
+      "PUID": "1000"
+      "PGID": "1000"
+      "UMASK": "002"
+      "TZ": "America/Sao_Paulo"
+      "TS_AUTHKEY": "f83074f7b26966b9e252918436e855b1dd2c4c8395c55096"
+      "TS_STATE_DIR": "/var/lib/tailscale"
+      "TS_USERSPACE": "false"
+      "TS_EXTRA_ARGS": "--reset --login-server=https://headscale.{{ duckdns_domain }}"
+      "TS_ACCEPT_DNS": "false"
+      "TS_ROUTES": "192.168.0.0/24"
+    network_mode: "host"
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    volumes:
+      - "{{ docker_dir }}/ts-authkey-test/state:/var/lib/tailscale"
+    capabilities:
+      - net_admin
+      - sys_module
+    comparisons:
+      env: strict
+      labels: strict
