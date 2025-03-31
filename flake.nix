@@ -13,14 +13,17 @@
     {
       devShells.x86_64-linux.default = pkgs.mkShell {
         buildInputs = with pkgs;[
-          ansible
-          ansible-lint
           nixpkgs-fmt
           nil
+
+          ansible
+          ansible-lint
+          docker
+          python311
         ];
-        # shellHook = ''
-        #   ansible-playbook main.yml
-        # '';
+        shellHook = ''
+          ansible-galaxy install -r requirements.yml
+        '';
       };
     };
 }
