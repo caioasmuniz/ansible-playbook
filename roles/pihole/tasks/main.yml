@@ -5,8 +5,8 @@
     - name: Uncomment line in resolved.conf
       ansible.builtin.lineinfile:
         dest: /etc/systemd/resolved.conf
-        regexp: '#DNSStubListener=yes'
-        line: 'DNSStubListener=no'
+        regexp: "#DNSStubListener=yes"
+        line: "DNSStubListener=no"
     - name: Change /etc/resolv.conf symlink to /run/systemd/resolve/resolv.conf
       ansible.builtin.file:
         src: /etc/resolv.conf
@@ -24,27 +24,6 @@
     owner: "{{ ansible_user }}"
     recurse: true
 
-- name: Create the dnsmasq.d folder
-  ansible.builtin.file:
-    path: "{{ docker_dir }}/pihole/dnsmasq.d"
-    owner: "{{ ansible_user }}"
-    recurse: true
-
-- name: Copy the custom.list file
-  ansible.builtin.template:
-    src: custom.list.j2
-    dest: "{{ docker_dir }}/pihole/pihole/custom.list"
-    group: 101
-    mode: 0775
-
-- name: Create the 05-pihole-custom-cname.conf file
-  ansible.builtin.file:
-    state: touch
-    dest: "{{ docker_dir }}/pihole/dnsmasq.d/05-pihole-custom-cname.conf"
-    group: 101
-    mode: 0775
-  register: cname_file
-
 - name: Create and run Pihole container
   community.docker.docker_container:
     image: "pihole/pihole:latest"
@@ -55,14 +34,20 @@
       "PGID": "1000"
       "UMASK": "002"
       "TZ": "America/Sao_Paulo"
+      "FTLCONF_dns_listeningMode": "all"
+      "FTLCONF_dns_upstreams": "1.1.1.1; 8.8.8.8"
+      "FTLCONF_webserver_api_password": "password"
     volumes:
       - "{{ docker_dir }}/pihole/pihole:/etc/pihole"
-      - "{{ docker_dir }}/pihole/dnsmasq.d:/etc/dnsmasq.d"
+    dns_servers:
+      - "1.1.1.1"
     networks:
       - name: docker
     ports:
       - "53:53/tcp"
       - "53:53/udp"
+    capabilities:
+      - SYS_NICE
     labels:
       traefik.http.routers.pihole.rule: Host(`pihole.{{ domain_name }}`)
       traefik.http.routers.pihole.entrypoints: https
@@ -73,11 +58,12 @@
       homepage.group: "Networks Tools"
       homepage.href: "http://pihole.{{ domain_name }}/admin"
       homepage.description: "DNS server with Ad-Blocking capabilities"
-      homepage.icon: "pihole.png"
+      homepage.icon: "pi-hole.png"
       homepage.widget.type: pihole
       homepage.widget.url: "http://pihole"
-      homepage.ping: http://pihole/admin
-
+      homepage.widget.version: "6"
+      homepage.widget.key: "password"
+      homepage.ping: "http://pihole"
     restart_policy: unless-stopped
 
 - name: Add CNAME entry for pihole

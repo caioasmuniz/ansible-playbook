@@ -1,8 +1,24 @@
 ---
+- name: Get if pihole container exists
+  community.docker.docker_container_info:
+    name: pihole
+  register: pihole_container_info
+
+- name: Login to Pi Hole API
+  ansible.builtin.uri:
+    url: "https://pihole.local.caioasmuniz.duckdns.org:443/api/auth"
+    method: POST
+    body: '{"password": "password"}'
+    validate_certs: false
+  register: response
+  when: pihole_container_info.exists 
+
 - name: Add CNAME record for {{ subdomain }}
-  when: cname_file is defined
-  ansible.builtin.lineinfile:
-    insertafter: EOF
-    line: "cname={{ subdomain }}.{{ domain_name }},{{ domain_name }}"
-    path: "{{ docker_dir }}/pihole/dnsmasq.d/05-pihole-custom-cname.conf"
-  notify: Restart pihole
+  ansible.builtin.uri:
+    url: "https://pihole.local.caioasmuniz.duckdns.org:443/api/config/dns%2FcnameRecords/{{ subdomain }}.{{ domain_name }}%2C{{ domain_name }}"
+    method: PUT
+    status_code: [201, 400]
+    headers:
+      sid: "{{ response.json.session.sid }}"
+    validate_certs: false
+  when: pihole_container_info.exists
