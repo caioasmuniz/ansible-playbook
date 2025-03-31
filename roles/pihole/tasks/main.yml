@@ -62,7 +62,6 @@
       homepage.widget.type: pihole
       homepage.widget.url: "http://pihole"
       homepage.widget.version: "6"
-      homepage.widget.key: "password"
       homepage.ping: "http://pihole"
     restart_policy: unless-stopped
 
