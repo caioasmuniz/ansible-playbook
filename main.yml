@@ -28,6 +28,8 @@
     - role: homepage
     - role: immich
       tags: immich
+    - role: glances
+      tags: glances
     - role: wireguard-client
       tags: wireguard-client
     - role: tailscale

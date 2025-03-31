@@ -1,0 +1,38 @@
+---
+- name: Create and run Glances container
+  community.docker.docker_container:
+    name: "glances"
+    image: "nicolargo/glances:latest-full"
+    pull: "{{ pull_images }}"
+    env:
+      TZ: "America/Sao_Paulo"
+      GLANCES_OPT: "-w"
+    networks:
+      - name: docker
+    pid_mode: host
+    volumes:
+      - /etc/os-release:/etc/os-release:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    restart_policy: unless-stopped
+    labels:
+      traefik.http.routers.glances.rule: Host(`glances.{{ domain_name }}`)
+      traefik.http.routers.glances.entrypoints: https
+      traefik.http.routers.glances.tls: "true"
+      traefik.http.services.glances.loadbalancer.server.port: "61208"
+
+      homepage.name: "Glances"
+      homepage.group: "Monitoring Tools"
+      homepage.href: "http://glances.{{ domain_name }}"
+      homepage.description: "System resources monitor"
+      homepage.icon: "glances.png"
+      homepage.ping: http://glances:61208
+      homepage.widget.type: glances
+      homepage.widget.url: "http://glances:61208"
+      homepage.widget.metric: cpu
+
+- name: Add CNAME entry for glances
+  ansible.builtin.import_role:
+    name: pihole
+    tasks_from: add_cname_record.yml
+  vars:
+    subdomain: glances
