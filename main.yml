@@ -23,9 +23,14 @@
 
 - hosts: home_server
   name: Install Home Server's containers
-  strategy: free
+  # strategy: free
   roles:
+    - role: pihole
+      tags: pihole
+    - role: traefik
+      tags: traefik
     - role: homepage
+      tags: homepage
     - role: immich
       tags: immich
     - role: glances
@@ -35,46 +40,32 @@
     - role: tailscale
       tags: tailscale
     - role: nextcloud
-      tags:
-        - nextcloud
+      tags: nextcloud
     - role: homeassistant
-      tags:
-        - homeassistant
+      tags: homeassistant
     - role: jellyfin
-      tags:
-        - jellyfin
+      tags: jellyfin
     - role: vaultwarden
-      tags:
-        - vaultwarden
+      tags: vaultwarden
     - role: transmission
-      tags:
-        - transmission
+      tags: transmission
     - role: jellyseerr
-      tags:
-        - jellyseerr
-    - role: prowlarr
-      tags:
-        - prowlarr
+      tags: jellyseerr
+    # - role: prowlarr
+    #   tags: prowlarr
     - role: radarr
-      tags:
-        - radarr
+      tags: radarr
     - role: lidarr
-      tags:
-        - lidarr
+      tags: lidarr
     - role: sonarr
-      tags:
-        - sonarr
+      tags: sonarr
     - role: bazarr
-      tags:
-        - bazarr
+      tags: bazarr
     - role: grafana
-      tags:
-        - grafana
+      tags: grafana
     - role: prometheus
-      tags:
-        - prometheus
+      tags: prometheus
     - role: scrutiny
-      tags:
-        - scrutiny
+      tags: scrutiny
     - role: openwebui
       tags: openwebui

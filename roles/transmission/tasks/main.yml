@@ -9,11 +9,6 @@
       "PGID": "1000"
       "UMASK": "002"
       "TZ": "America/Sao_Paulo"
-      # "TRANSMISSION_WEB_HOME": "/combustion-release/"
-      # "TRANSMISSION_WEB_HOME": "/transmission-web-control/"
-      # "TRANSMISSION_WEB_HOME": "/kettu/"
-      "TRANSMISSION_WEB_HOME": "/flood-for-transmission/"
-      # "TRANSMISSION_WEB_HOME": "/transmissionic/"
     volumes:
       - "{{ docker_dir }}/transmission:/config"
       - "{{ media_dir }}/torrents:/data/torrents"
